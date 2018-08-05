@@ -1,0 +1,23 @@
+{
+  "name": "vue-slide-plus",
+  "version": "1.0.0",
+  "description": "A flexible, responsive, friendly slide for Vue.js",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/git-onepixel/vue-slide-plus.git"
+  },
+  "keywords": [
+    "vue",
+    "slide"
+  ],
+  "author": "onepixel",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/git-onepixel/vue-slide-plus/issues"
+  },
+  "homepage": "https://github.com/git-onepixel/vue-slide-plus#readme"
+}
