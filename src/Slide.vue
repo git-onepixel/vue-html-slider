@@ -222,7 +222,7 @@ export default {
             top: 50%;
             left: 50%;
             margin-top: -3px;
-            margin-left: -3px;
+            margin-left: -3px; 
         }
     }
 </style>
