@@ -76,9 +76,11 @@ export default {
                 item.index = index;
                 return item;
             });
-            this.initTouchEvent();
-            this.setPageNow();
-            this.callback('changed');             
+            if (this.$refs.container) {
+                this.initTouchEvent();
+                this.setPageNow();
+                this.callback('changed'); 
+            }
         },
        
         initTouchEvent() {
@@ -105,8 +107,8 @@ export default {
                // 单手指触摸或者多手指同时触摸，禁止第二个手指延迟操作事件
                if (e.touches.length === 1 || isTouchEnd) {
                    var touch = e.touches[0];
-                   startX = touch.pageX;
-                   startY = touch.pageY;
+                   startX = touch.clientX;
+                   startY = touch.clientY;
                    // 本次滑动前的初始位置
                    initialPos = currentPosition;  
                    // 取消动画效果 
@@ -133,8 +135,8 @@ export default {
                if (isTouchEnd) return ;
                
                var touch = e.touches[0];
-               var deltaX = touch.pageX - startX;
-               var deltaY = touch.pageY - startY;
+               var deltaX = touch.clientX - startX;
+               var deltaY = touch.clientY - startY;
                
                var translate = initialPos + deltaX; // 当前需要移动到的位置
                // 如果translate>0 或 < maxWidth,则表示页面超出边界
@@ -207,7 +209,7 @@ export default {
                     }, 100);
                 } else {
                     if (!isMove) {
-                        let obj = self.cards[self.pageNow - 1]; 
+                     
                         if (deltaT < 300) {
                             self.callback('click');
                         }  
