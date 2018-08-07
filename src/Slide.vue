@@ -1,11 +1,14 @@
 <template>
-    <div class="vue-slide-plus-wrapper">
-        <ul class="card-list-wrapper" ref="container" :style="getTransform()">
-            <li class="card" v-for="card in cards" :style="setBackground(card.url)">
+    <div class="vue-slide-ui-wrapper">
+        <ul class="card-list-wrapper" ref="container" :style="{transform: transform}">
+            <li class="card-wrapper" v-for="card in cards">
+               <div class="card" :class="options.clsName">
+                    <img alt="" :src="card.src">
+               </div>
             </li>
         </ul>
-        <ol class="page-number">
-          <li v-for="(card, index) in cards" :class="{now: currentPoint}"></li>
+        <ol class="page-number" v-show="!options.hideMark">
+          <li v-for="(card, index) in cards" :class="{now: currentPoint == index}"></li>
         </ol>
     </div>
 </template>
@@ -15,16 +18,53 @@ export default {
         return {
             cards: [],
             pageNow: 1,
-            currentPoint: -1;
-            transform: '';
+            currentPoint: -1,
+            transform: ''
         }
     },
     props: {
-        images: {
+        data: {
             type: Array,
             default() {
                 return [];
             }
+        },
+        options: {
+            type: Object,
+            default() {
+                return {
+                    // 是否自动播放
+                    autoplay: false,
+                    // 帧间隔(毫秒)
+                    interval: 1000,
+                    // 是否隐藏页码
+                    hideMark: false,
+                    // 自定义样式
+                    clsName: 'demo',
+                    // 滑动结束后触发
+                    changed: function (obj) {
+                        console.log('changed')
+                    },
+                    // 点击
+                    click: function (obj) {
+                        console.log('click')
+                    },
+                    // 长按
+                    longTap: function (obj) {
+                        console.log('longTap')   
+                    },
+                    // 长按结束 
+                    longTapEnd: function (obj) {
+                        console.log('longTapEnd')       
+                    }
+                }
+            }
+        }
+    },
+    computed: {
+        current() {
+            let index = this.pageNow - 1;
+            return this.cards[index];
         }
     },
     mounted() {
@@ -32,20 +72,20 @@ export default {
     },
     methods: {
         initialize() {
-            this.cards = this.images(image => {
-
-                return image;
+            this.cards = this.data.map((item, index) => {
+                item.index = index;
+                return item;
             });
-            // this.points
             this.initTouchEvent();
             this.setPageNow();
-
+            this.callback('changed');             
         },
        
         initTouchEvent() {
+           let self = this; 
            let container =  this.$refs.container;
            var currentPosition = 0; // 记录当前页面位置
-          //  var currentPoint = -1;   // 记录当前点的位置
+           //  var currentPoint = -1;   // 记录当前点的位置
            
            // 页面宽度
            let pageWidth = document.documentElement.offsetWidth; 
@@ -57,6 +97,7 @@ export default {
            var isMove = false; // 是否发生左右滑动
            var startT = 0; // 记录手指按下去的时间
            var isTouchEnd = true; // 标记当前滑动是否结束(手指已离开屏幕) 
+           var timer = null;
 
            // 手指放在屏幕上
            container.addEventListener('touchstart', e => {
@@ -69,10 +110,18 @@ export default {
                    // 本次滑动前的初始位置
                    initialPos = currentPosition;  
                    // 取消动画效果 
-                   viewport.style.webkitTransition = ''; 
+                   container.style.webkitTransition = ''; 
                    startT = + new Date(); // 记录手指按下的开始时间
                    isMove = false; // 是否产生滑动
                    isTouchEnd = false; // 当前滑动开始
+
+                   timer = setTimeout(() => {
+                       if (!isMove) {
+                          self.callback('longTap');
+                       } else {
+                          timer && clearTimeout(timer); 
+                       }
+                   }, 500);
                }
            }, false);
 
@@ -96,7 +145,10 @@ export default {
                   translate = maxWidth; 
                }
                deltaX = translate - initialPos;
-               this.transform(translate);
+               
+               self.setTransform(translate);
+               currentPosition = translate;
+
                isMove = true;
                moveLength = deltaX;
                // 判断手指滑动的方向
@@ -107,6 +159,7 @@ export default {
            container.addEventListener('touchend', e => {
                e.preventDefault();
                var translate = 0;
+               timer && clearTimeout(timer); 
                // 计算手指在屏幕上停留的时间
                var deltaT = + new Date() - startT;
                // 发生了滑动，并且当前滑动事件未结束
@@ -114,7 +167,7 @@ export default {
                     // 标记当前完整的滑动事件已经结束 
                     isTouchEnd = true; 
                     // 使用动画过渡让页面滑动到最终的位置
-                    viewport.style.webkitTransition = '0.3s ease -webkit-transform';
+                    container.style.webkitTransition = '0.3s ease transform';
                     if (deltaT < 300) { // 如果停留时间小于300ms,则认为是快速滑动，无论滑动距离是多少，都停留到下一页
                         if (currentPosition === 0 && translate === 0) {
                             return ;
@@ -133,8 +186,8 @@ export default {
                             translate = currentPosition - moveLength;
                         } else {
                             // 如果滑动距离大于屏幕的50%，则滑动到下一页
-                            translate = direction === 'left'?
-                            currentPosition - (pageWidth + moveLength) 
+                            translate = direction === 'left'
+                            ? currentPosition - (pageWidth + moveLength) 
                             : currentPosition + pageWidth - moveLength;
                             translate = translate > 0 ? 0 : translate;
                             translate = translate < maxWidth ? maxWidth : translate;
@@ -142,58 +195,79 @@ export default {
                     }
                    
                     // 执行滑动，让页面完整的显示到屏幕上
-                    this.transform(translate);
+                     self.setTransform(translate);
+                    currentPosition = translate;
                     // 计算当前的页码
-                    pageNow = Math.round(Math.abs(translate) / pageWidth) + 1;
+                    self.pageNow = Math.round(Math.abs(translate) / pageWidth) + 1;
 
                     setTimeout(() => {
                         // 设置页码，DOM操作需要放到异步队列中，否则会出现卡顿
-                        this.setPageNow();
+                        self.setPageNow();
+                        self.callback('changed');
                     }, 100);
+                } else {
+                    if (!isMove) {
+                        let obj = self.cards[self.pageNow - 1]; 
+                        if (deltaT < 300) {
+                            self.callback('click');
+                        }  
+                        if (deltaT > 500) {
+                            self.callback('longTapEnd');
+                        }
+                       
+                    }
                 }
            }, false);
         },
 
         setTransform(offset) {
-           
-           this.transform = offset;
-           currentPosition = translate;
+            this.transform = `translate3d(${offset}px, 0, 0)`;
         },
         setPageNow() {
-            currentPoint = pageNow - 1;   
+            this.currentPoint = this.pageNow - 1;   
         },
-        setBackground(url) {
-            return {
-               backgroundImage: 'url(${url})` 
-            }
-        },
-        getTransform(url) {
-            return {
-                transform: 'translate3d(' + this.transform + 'px, 0, 0)' 
-            }
+        callback(fn) {
+           let cb = this.options[fn];
+           let obj = this.current;
+           if (typeof cb !== 'function') {
+                cb = function (obj) {
+                    console.log(fn, obj);
+                }
+           }
+           cb(obj);
         }
     }
 }
 </script>
 <style lang="less" scoped>
-    @import './base/less';
-    .vue-slide-plus-wrapper {
+    // @import './base.less';
+    .vue-slide-ui-wrapper {
         position: relative;
         overflow: hidden;
-
+        height:100%;
         .card-list-wrapper {
             overflow: hidden;
             width: fit-content;
             -webkit-transform: translate3d(0,0,0);
             backface-visibility: hidden;
-            .card {
-               font-size: 0;
+            white-space: nowrap;
+            height:100%;
+            font-size: 0;
+            .card-wrapper {
                display: inline-block;
                width: 100vw;
-               background-size: cover;
-               background-position: center center;
-               background-repeat: no-repeat; 
-               visibility: visible;
+               height: 100%;
+               .card{
+                    height: 100%;
+                    // margin: 0 3px;
+                    display:-webkit-box;
+                    -webkit-box-align:center;
+                    img {
+                        width: 100%;
+                        display: block;
+                        height: 100%;
+                    }
+               }
             }
         }
         .page-number {
@@ -203,26 +277,26 @@ export default {
             left: 35%;
             height: 1em;
             width: 30%;
-        }
-        .pagenumber div{
-            -webkit-box-flex: 1;
-            width: 0;
-            position: relative;
-        }
-        .pagenumber .now:after {
-            background: rgba(255,255,255,1) !important;
-        }
-        .pagenumber div:after{
-            content: "";
-            width: 6px;
-            height: 6px; 
-            background: rgba(255,255,255,0.3);
-            border-radius: 50%;
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            margin-top: -3px;
-            margin-left: -3px; 
+            li {
+                -webkit-box-flex: 1;
+                width: 0;
+                position: relative;
+                &.now:after {
+                    background: rgba(255,255,255,1) !important;
+                }
+                &:after {
+                    content: "";
+                    width: 6px;
+                    height: 6px; 
+                    background: rgba(255,255,255,0.3);
+                    border-radius: 50%;
+                    position: absolute;
+                    top: 50%;
+                    left: 50%;
+                    margin-top: -3px;
+                    margin-left: -3px; 
+                }
+            }
         }
     }
 </style>
