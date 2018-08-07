@@ -33,6 +33,8 @@ export default {
             type: Object,
             default() {
                 return {
+                    // 当前位置
+                    index: 0,
                     // 是否自动播放
                     autoplay: false,
                     // 帧间隔(毫秒)
@@ -77,10 +79,18 @@ export default {
                 return item;
             });
             if (this.$refs.container) {
-                this.initTouchEvent();
+                this.initView()
                 this.setPageNow();
+                this.initTouchEvent();
                 this.callback('changed'); 
             }
+        },
+        
+        initView() {
+            let index = this.options.index;
+            this.pageNow = index + 1;
+            let pageWidth = this.$refs.viewport.offsetWidth;
+            this.setTransform(-pageWidth * index);
         },
        
         initTouchEvent() {
