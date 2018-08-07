@@ -1,5 +1,5 @@
 <template>
-    <div class="vue-slide-ui-wrapper">
+    <div class="vue-slide-ui-wrapper" ref="viewport">
         <ul class="card-list-wrapper" ref="container" :style="{transform: transform}">
             <li class="card-wrapper" v-for="card in cards">
                <div class="card" :class="options.clsName">
@@ -90,7 +90,7 @@ export default {
            //  var currentPoint = -1;   // 记录当前点的位置
            
            // 页面宽度
-           let pageWidth = document.documentElement.offsetWidth; 
+           let pageWidth = this.$refs.viewport.offsetWidth; 
            var maxWidth = - pageWidth * (this.cards.length -1); // 页面滑动最后一页的位置
            var startX, startY;
            var initialPos = 0;  // 手指按下的屏幕位置
