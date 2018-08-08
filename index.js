@@ -1,8 +1,5 @@
-import Slide from 'src/Slide.vue';
-
-// export default {
-//     install(Vue) {
-//         Vue.component('v-slide-ui', Slide)
-//     }
-// }
-export default Slide
+/**
+ * @file 入口文件
+ * @author onepixel
+ */
+export { default }  from 'src/Slider.vue';

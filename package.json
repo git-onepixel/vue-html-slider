@@ -1,7 +1,7 @@
 {
-  "name": "vue-slide-plus",
+  "name": "mini-slider",
   "version": "1.0.0",
-  "description": "A flexible, responsive, friendly slide for Vue.js",
+  "description": "A flexible, responsive, friendly slider for Vue.js",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -12,12 +12,12 @@
   },
   "keywords": [
     "vue",
-    "slide"
+    "slider"
   ],
   "author": "onepixel",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/git-onepixel/vue-slide-plus/issues"
+    "url": "https://github.com/git-onepixel/mini-slider/issues"
   },
-  "homepage": "https://github.com/git-onepixel/vue-slide-plus#readme"
+  "homepage": "https://github.com/git-onepixel/mini-slider#readme"
 }
