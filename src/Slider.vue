@@ -1,5 +1,5 @@
 <template>
-    <div class="mini-slider-wrapper" ref="viewport">
+    <div class="vue-html-slider-wrapper" ref="viewport">
         <!--slider-list-->
         <ul class="slider-list-wrapper" ref="container"  
             :style="{transform: transform, transition: transition}">
@@ -273,7 +273,7 @@ export default {
         list-style-type: none;
         list-style-image: none;
     }
-    .mini-slider-wrapper {
+    .vue-html-slider-wrapper {
         position: relative;
         overflow: hidden;
         height:100%;

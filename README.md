@@ -1,2 +1,2 @@
-# mini-slider
-A flexible, responsive, friendly slider for Vue.js
+# vue-html-slider 
+A flexible, responsive, friendly Slider for Vue2.x
