@@ -13,7 +13,7 @@ A simple vue silder component .
 [license]: https://img.shields.io/npm/l/vue-html-slider.svg
 [license-url]:https://github.com/git-onepixel/vue-html-slider/blob/master/LICENSE
 
-# Installation
+## Installation
 use npm
 ``` bash
 npm install vue-html-slider
@@ -23,7 +23,7 @@ use yarn
 yarn add vue-html-slider
 ```
 
-# Usage
+## Usage
 ``` bash
 # Vue template
 <template> 
@@ -53,27 +53,22 @@ yarn add vue-html-slider
                 ],
                 # Define slider by userself 
                 options: {
-                    # Default image position index.
                     index: 0,
-                    # Whether autoplay, not implement.
                     autoplay: false,
-                    # Autoplay interval mills, not implement.
                     interval: 1000, 
-                    # Apply a css class on image element.
                     clsName: 'xxx', 
-                    # Whether hide page number on bottom of image.
                     hideIndicator: false, 
-                    # It fired when image position changed.
-                    changed: function (obj) {
+                    changed(obj) {
+                        # obj: {index, src}
                     },
-                    # A click event on image element.
-                    click: function (obj) {
+                    click(obj) {
+                        # obj: {index, src}
                     },
-                    # Long tap event on image element.
-                    longTap: function (obj) {
+                    longTap(obj) {
+                        # obj: {index, src}
                     },
-                    # When long tap event finished. 
-                    longTapEnd: function (obj) {
+                    longTapEnd(obj) {
+                        # obj: {index, src}
                     }
                 }
             }
@@ -82,7 +77,7 @@ yarn add vue-html-slider
 </script>
 
 ```
-## Configuration
+### Configuration
 | Property | Type | default | Description | 
 | ------ | ------ | ------ | ------ | 
 | index | Number | 0 |  Default image position index. |
@@ -91,16 +86,16 @@ yarn add vue-html-slider
 | clsName | String | | Apply a css class on image element. | 
 | hideIndicator | Boolen | false | Whether hide page number on bottom of image. | 
 
-## Events
+### Events
 | Event | Type | Params | Description | 
 | ------ | ------ | ------ | ------ | 
-| changed | Function | image object |  It fired when image position changed. |
-| click | Function | image object | Whether autoplay, not implement. |
-| longTap | Function | image object |  Long tap event on image element. |
-| longTapEnd | Function | object | When long tap event finished. | 
+| changed | Function | obj: {index, src} |  It fired when image position changed. |
+| click | Function | obj: {index, src} | Whether autoplay, not implement. |
+| longTap | Function | obj: {index, src} |  Long tap event on image element. |
+| longTapEnd | Function | obj: {index, src} | When long tap event finished. | 
 
-# Dependence
-The component developed by vue2.x with es6 and less , so it need the follow npm packages for runing on your code .
+## Dependence
+The component developed by vue2.x with es6 and less , so it need the follow npm packages for runing at your code .
 ```
 "devDependencies": {
     "babel-core": "^6.25.0",
@@ -131,9 +126,9 @@ The component developed by vue2.x with es6 and less , so it need the follow npm 
 ```
 As well , in order to apply it in your project easily . A vue demo project for this component . see [slider-demo](https://github.com/git-onepixel/slider-demo)
 
-# License
+## License
 This project is licensed under the MIT License .
 See the [LICENSE.md](https://github.com/git-onepixel/vue-html-slider/blob/master/LICENSE) file for details .
 
-# Keywords
+## Keywords
 vue slider carousel
