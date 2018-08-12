@@ -11,7 +11,11 @@
         </ul>
         <!--indicators-->
         <ol class="indicators" v-show="!options.hideIndicator">
-            <li v-for="card in cards" v-if="card.index < 20" :class="{current: curIndex == card.index}"></li>
+            <li v-for="card in cards" 
+                :class="{current: card.index == curIndex}"
+                v-if="card.index < 20"
+                :key="card.index">
+            </li>
         </ol>
     </div>
 </template>
@@ -46,11 +50,11 @@ export default {
                     changed: function (obj) {
                         console.log('changed');
                     },
-                    // 单击
+                    // 单击事件
                     click: function (obj) {
                         console.log('click');
                     },
-                    // 长按
+                    // 长按事件
                     longTap: function (obj) {
                         console.log('longTap');   
                     },
@@ -183,18 +187,17 @@ export default {
                     isTouchEnd = true; 
                     // 使用动画过渡让页面滑动到最终的位置
                     self.transition = 'transform ease 0.3s';
-                    if (deltaT < 300) { // 如果停留时间小于300ms,则认为是快速滑动，无论滑动距离是多少，都停留到下一页
+                    if (deltaT < 300) { 
                         if (curOffset === 0 && offset === 0) {
                             return ;
                         }
+                        // 如果停留时间小于300ms,则认为是快速滑动，无论滑动距离是多少，都停留到下一页
                         offset = moveOrient === 'left' 
                             ? curOffset - cardWidth - moveOffset
                             : curOffset + cardWidth - moveOffset;
                         // 如果最终位置超过边界位置，则停留在边界位置
-                        // 左边界
-                        offset = offset > 0 ? 0 : offset; 
-                        // 右边界
-                        offset = offset < maxWidth ? maxWidth : offset; 
+                        offset = offset > 0 ? 0 : offset;  // 左边界
+                        offset = offset < maxWidth ? maxWidth : offset; // 右边界
                     } else {
                         // 如果滑动距离小于屏幕的50%，则退回到上一页
                         if (Math.abs(moveOffset) / cardWidth < 0.5) {
@@ -215,8 +218,8 @@ export default {
                     // 计算当前的页码
                     self.pageNow = Math.round(Math.abs(offset) / cardWidth) + 1;
 
+                    // 设置页码，DOM操作需要放到异步队列中，否则会出现卡顿
                     setTimeout(() => {
-                        // 设置页码，DOM操作需要放到异步队列中，否则会出现卡顿
                         self.setPageNow();
                         self.callback('changed');
                     }, 100);
