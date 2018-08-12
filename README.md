@@ -129,6 +129,3 @@ As well , in order to apply it in your project easily . A vue demo project for t
 ## License
 This project is licensed under the MIT License .
 See the [LICENSE.md](https://github.com/git-onepixel/vue-html-slider/blob/master/LICENSE) file for details .
-
-## Keywords
-vue slider carousel
