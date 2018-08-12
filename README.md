@@ -95,7 +95,7 @@ yarn add vue-html-slider
 | longTapEnd | Function | obj(current image) | When long tap event finished. | 
 
 ## Dependence
-The component developed by vue2.x with es6 and less , so it need the follow npm packages for runing at your code .
+The component developed by vue2 with es6 and less , so it need the follow npm packages for running at your code .
 ```
 "devDependencies": {
     "babel-core": "^6.25.0",
