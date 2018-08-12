@@ -89,10 +89,10 @@ yarn add vue-html-slider
 ### Events
 | Event | Type | Params | Description | 
 | ------ | ------ | ------ | ------ | 
-| changed | Function | obj: {index, src} |  It fired when image position changed. |
-| click | Function | obj: {index, src} | Whether autoplay, not implement. |
-| longTap | Function | obj: {index, src} |  Long tap event on image element. |
-| longTapEnd | Function | obj: {index, src} | When long tap event finished. | 
+| changed | Function | obj(current image) |  It fired when image position changed. |
+| click | Function | obj(current image) | A click event fired on image element. |
+| longTap | Function | obj(current image) |  Long tap event on image element. |
+| longTapEnd | Function | obj(current image) | When long tap event finished. | 
 
 ## Dependence
 The component developed by vue2.x with es6 and less , so it need the follow npm packages for runing at your code .
@@ -124,7 +124,7 @@ The component developed by vue2.x with es6 and less , so it need the follow npm 
     "vue": "^2.3.4"
 }
 ```
-As well , in order to apply it in your project easily . A vue demo project for this component . see [slider-demo](https://github.com/git-onepixel/slider-demo)
+As well , in order to apply it in your project easily . A vue demo project for this component . See [slider-demo](https://github.com/git-onepixel/slider-demo) for help .
 
 ## License
 This project is licensed under the MIT License .
