@@ -45,10 +45,10 @@ yarn add vue-html-slider
                 # Image list as array
                 images: [
                     {
-                        src: http://path/to/a.png
+                        src: 'http://path/to/a.png'
                     },
                     {
-                        src: http://path/to/b.png
+                        src: 'http://path/to/b.png'
                     }
                 ],
                 # Define slider by userself 
