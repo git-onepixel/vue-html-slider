@@ -1,6 +1,6 @@
 {
   "name": "vue-html-slider",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "A flexible, responsive, friendly Slider for Vue2.x",
   "main": "index.js",
   "scripts": {
