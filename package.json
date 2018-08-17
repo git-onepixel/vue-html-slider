@@ -1,7 +1,7 @@
 {
   "name": "vue-html-slider",
   "version": "1.0.4",
-  "description": "A flexible, responsive, friendly Slider for Vue2.x",
+  "description": "A simple vue silder component.",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -12,7 +12,8 @@
   },
   "keywords": [
     "vue",
-    "slider"
+    "slider",
+    "carousel"
   ],
   "author": "onepixel",
   "license": "MIT",
