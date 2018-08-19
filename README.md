@@ -106,7 +106,7 @@ yarn add vue-html-slider
 | pullRight | Function | image, options | A pull left event fired when moving reached right boundary. |  
 
 ## Dependence
-The component developed by vue2 with es6 and less , so it need the follow npm packages for running at your code .
+The component developed by vue2 with es6 and less, so it need the follow npm packages for running at your code.
 ```
 "devDependencies": {
     "babel-core": "^6.25.0",
