@@ -1,8 +1,8 @@
 {
   "name": "vue-html-slider",
-  "version": "1.0.4",
+  "version": "1.0.5",
   "description": "A simple vue silder component.",
-  "main": "index.js",
+  "main": "slider",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -12,8 +12,10 @@
   },
   "keywords": [
     "vue",
+    "component",
     "slider",
-    "carousel"
+    "carousel",
+    "bounce"
   ],
   "author": "onepixel",
   "license": "MIT",

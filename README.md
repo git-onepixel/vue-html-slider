@@ -4,7 +4,8 @@
 [![downloads][downloads]][downloads-url]
 [![license][license]][license-url]
 
-A simple vue silder component .
+A simple vue silder component.
+
 
 [npm]: https://img.shields.io/npm/v/vue-html-slider.svg
 [npm-url]: https://www.npmjs.com/package/vue-html-slider
@@ -56,8 +57,9 @@ yarn add vue-html-slider
                     index: 0,
                     autoplay: false,
                     interval: 1000, 
-                    clsName: 'xxx', 
+                    clsName: '', 
                     hideIndicator: false, 
+                    disableBounce: false,
                     changed(obj) {
                         # obj: {index, src}
                     },
@@ -67,8 +69,13 @@ yarn add vue-html-slider
                     longTap(obj) {
                         # obj: {index, src}
                     },
-                    longTapEnd(obj) {
+                    longTapEnd(obj, options) {
                         # obj: {index, src}
+                        # options: {x}
+                    },
+                    pullLeft(obj, options) {
+                        # obj: {index, src}
+                        # options: {x}
                     }
                 }
             }
@@ -84,15 +91,19 @@ yarn add vue-html-slider
 | autoplay | Boolean | false | Whether autoplay, not implement. |
 | interval | Number | 1000 |  Autoplay interval mills, not implement. |
 | clsName | String | | Apply a css class on image element. | 
-| hideIndicator | Boolen | false | Whether hide page number on bottom of image. | 
+| hideIndicator | Boolen | false | Whether hide page number on bottom of image. As well, it can display 20  indicators at most.| 
+| isDebug | Boolean | false | In Debug mode, slider will print some log infos by `console.log`. |
+| disableBounce | Boolen | false | Whether disable bounce when reached page boundary. | 
 
 ### Events
 | Event | Type | Params | Description | 
 | ------ | ------ | ------ | ------ | 
-| changed | Function | obj(current image) |  It fired when image position changed. |
-| click | Function | obj(current image) | A click event fired on image element. |
-| longTap | Function | obj(current image) |  Long tap event on image element. |
-| longTapEnd | Function | obj(current image) | When long tap event finished. | 
+| changed | Function | image |  It fired when image position changed. |
+| click | Function | image | A click event fired on image element. |
+| longTap | Function | image |  Long tap event on image element. |
+| longTapEnd | Function | image | When long tap event finished. |
+| pullLeft | Function | image, options | A pull left event fired when moving reached right boundary. | 
+| pullRight | Function | image, options | A pull left event fired when moving reached right boundary. |  
 
 ## Dependence
 The component developed by vue2 with es6 and less , so it need the follow npm packages for running at your code .
@@ -124,8 +135,8 @@ The component developed by vue2 with es6 and less , so it need the follow npm pa
     "vue": "^2.3.4"
 }
 ```
-As well , in order to apply it in your project easily . A vue demo project for this component . See [slider-demo](https://github.com/git-onepixel/slider-demo) for help .
+As well, in order to apply it in your project easily. A vue demo project for this component. See [slider-demo](https://github.com/git-onepixel/slider-demo) for help.
 
 ## License
-This project is licensed under the MIT License .
-See the [LICENSE.md](https://github.com/git-onepixel/vue-html-slider/blob/master/LICENSE) file for details .
+This project is licensed under the MIT License.
+See the [LICENSE.md](https://github.com/git-onepixel/vue-html-slider/blob/master/LICENSE) file for details.
