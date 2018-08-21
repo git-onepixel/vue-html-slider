@@ -4,7 +4,8 @@
         <ul class="slider-list-wrapper" ref="container"  
             :style="{transform: transform, transition: transition}">
             <li class="card-wrapper" 
-                v-for="(card, index) in cards" 
+                v-for="(card, index) in cards"
+                :style="getStyle(index)" 
                 :key="index">
                 <div class="card" :class="options.clsName">
                     <img alt="" :src="card.src">
@@ -22,8 +23,8 @@
     </div>
 </template>
 <script>
-export {default} from './script/slider';
+    export { default } from './script/slider';
 </script>
 <style lang="less" scoped>
-@import url(./style/slider.less);
+    @import url(./style/slider.less);
 </style>

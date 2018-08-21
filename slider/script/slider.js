@@ -72,9 +72,13 @@ export default {
             // What's different from first called is that the html DOM is destroyed.
             // So, you need ensure the DOM object available before initialization.  
             if (this.$refs.container) {
-                this.initView()
+                // Initialize slider.
+                this.initView();
+                // Calculate current page index.
                 this.setCurrentPageIndex();
+                // Bind user touch event.
                 this.bindTouchEvent();
+                // Handle default event.
                 this.callback(constant.CHANGED); 
             }
         },
@@ -83,11 +87,16 @@ export default {
          * Initialize page view.
          */
         initView() {
+            // The default position index.
             let index = this.options.index || 0;
             this.pageNow = index + 1;
+            // Calculate card width.
             this.cardWidth = this.$refs.viewport.offsetWidth;
+            // Add a gap to between images.
+            this.cardWidth += this.options.gapWidth || 0;
             // The max offset of last page.
             this.maxOffset = - this.cardWidth * (this.cards.length -1);
+            // Transform images to default position.
             this.setTransform(- this.cardWidth * index);
         },
        
@@ -101,7 +110,7 @@ export default {
            // Record current page index.
            let curOffset = - (this.cardWidth * this.curIndex);
            // Initial client x.
-           let startX;
+           let startX, startY;
            // The offset of pressing the screen. 
            let startOffset = 0;
            // Current move offset.
@@ -112,6 +121,8 @@ export default {
            let startT = 0;
            // Record current touch event whether has been end.
            let isTouchEnd = true;
+           // The move offset prefer horizontal.
+           let isPreferHorizontal = false;
            // `setTimeout` handle.
            let timer = null;
            // Finger just press on screen.
@@ -122,6 +133,7 @@ export default {
                if (e.touches.length === 1 || isTouchEnd) {
                    let touch = e.touches[0];
                    startX = touch.clientX;
+                   startY = touch.clientY;
                    // Set initial position before moving.
                    startOffset = curOffset;
                    // Initialize `transition`
@@ -132,7 +144,6 @@ export default {
                    isMove = false;
                    // Initialize `isTouchEnd`
                    isTouchEnd = false;
-
                    // Check whether trigger `touchmove`
                    // If it don't move after 500 mills, I think it triggered `longtap` event.
                    // Otherwise, cancel timer to stop check.
@@ -152,8 +163,12 @@ export default {
                if (isTouchEnd) return ; 
                
                let touch = e.touches[0];
-               // Finger move offset really.
+               // Finger move offset X really.
                let deltaX = touch.clientX - startX;
+               // Finger move offset Y really.
+               let deltaY = touch.clientY - startY;
+               // If deltaX more than deltaY, the touch moving is prefer horizontal.
+               isPreferHorizontal = Math.abs(deltaX) > Math.abs(deltaY);
                // Page should move offset.
                let offset = startOffset + deltaX;
                // If the offset over left boundary or right bounday.
@@ -194,7 +209,10 @@ export default {
                         if (offset === 0)  return ;
                     }
                     // It is a fast move if the mills is less then 300 mills.
-                    if (deltaT < config.fastMoveMills) { 
+                    // It will can move next only when fast move width horizontal.
+                    // If the isPreferHorizontal is false, I think user don't want to next page.
+                    // So, it need to recovery offset x to original position. 
+                    if (deltaT < config.fastMoveMills && isPreferHorizontal) { 
                         // Moving to next page.
                         offset = self.getMoveNextOffset(curOffset, moveOffset);
                     } else {
@@ -325,6 +343,20 @@ export default {
          */
         setTransform(offset) {
             this.transform = `translate3d(${offset}px, 0, 0)`;
+        },
+
+        /**
+         * Get slider item style.
+         * @param {*} index 
+         */
+        getStyle(index) {
+            let css = '';
+            let last = this.cards.length - 1 === index;
+            let gapWidth = this.options.gapWidth || 0;
+            if (gapWidth && !last) {
+                css = `margin-right: ${gapWidth}px`;
+            }
+            return css;
         },
 
         /**

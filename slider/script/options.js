@@ -17,6 +17,8 @@ export default {
     disableBounce: false,
     // Apply a css class to every page of images.
     clsName: '',
+    // The gap width of images.
+    gapWidth: 0,
     // In Debug mode, slider will print some log infos by `console.log`.
     isDebug: false,
     // It fired when page position changed.
