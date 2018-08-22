@@ -56,8 +56,10 @@ yarn add vue-html-slider
                 options: {
                     index: 0,
                     autoplay: false,
-                    interval: 1000, 
+                    interval: 1000,
+                    loop: false, 
                     clsName: '', 
+                    useFade: false,
                     gapWidth: 10,
                     hideIndicator: false, 
                     disableBounce: false,
@@ -91,9 +93,11 @@ yarn add vue-html-slider
 | index | Number | 0 |  Default image position index. |
 | autoplay | Boolean | false | Whether autoplay, not implement. |
 | interval | Number | 1000 |  Autoplay interval mills, not implement. |
+| loop | Boolean | false | Playing slider with loop, not implement. |
 | clsName | String | -- | Apply a css class on image element. | 
+| useFade | Boolean | false | Apply fade animation to image when appears. | 
 | gapWidth | Number | 0 | The gap width of images. | 
-| hideIndicator | Boolen | false | Whether hide page number on bottom of image. As well, it can display 20  indicators at most.| 
+| hideIndicator | Boolen | false | Whether hide page number on bottom of image. As well, it can display 20 indicators at most.| 
 | isDebug | Boolean | false | In Debug mode, slider will print some log infos by `console.log`. |
 | disableBounce | Boolen | false | Whether disable bounce when reached slider boundary. | 
 

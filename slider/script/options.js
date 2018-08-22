@@ -11,12 +11,16 @@ export default {
     autoplay: false,
     // Set slider autoplay interval mills, not implement.
     interval: 1000,
+    // Playing slider with loop, not implement. 
+    loop: false,
     // Set whether hide page number on bottom of image.
     hideIndicator: false,
     // Whether disable bounce when reached page boundary.
     disableBounce: false,
     // Apply a css class to every page of images.
     clsName: '',
+    // Apply fade animation to image when appears.
+    useFade: false,
     // The gap width of images.
     gapWidth: 0,
     // In Debug mode, slider will print some log infos by `console.log`.

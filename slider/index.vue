@@ -5,6 +5,7 @@
             :style="{transform: transform, transition: transition}">
             <li class="card-wrapper" 
                 v-for="(card, index) in cards"
+                :class="{fade: options.useFade, show: card.display}"
                 :style="getStyle(index)" 
                 :key="index">
                 <div class="card" :class="options.clsName">
@@ -15,9 +16,9 @@
         <!--indicators-->
         <ol class="indicators" v-show="!options.hideIndicator">
             <li v-for="(card, index) in cards"
-                :key="index"
+                v-if="card.index < maxIndicators"
                 :class="{current: card.index == curIndex}"
-                v-if="card.index < maxIndicators">
+                :key="index">
             </li>
         </ol>
     </div>

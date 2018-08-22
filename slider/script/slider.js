@@ -64,9 +64,10 @@ export default {
         initialize() {
             // Make the prop data copy to inner variable.
             // As well, add a extra index for every card.
-            this.cards = this.data.map((item, index) => {
-                item.index = index;
-                return item;
+            this.cards = this.data.map((card, index) => {
+                card.index = index;
+                card.display = false;
+                return card;
             });
             // The `mounted` method will be called again when the component destroyed.
             // What's different from first called is that the html DOM is destroyed.
@@ -98,6 +99,8 @@ export default {
             this.maxOffset = - this.cardWidth * (this.cards.length -1);
             // Transform images to default position.
             this.setTransform(- this.cardWidth * index);
+            // Apply fade to image.
+            this.setImageFade(false);
         },
        
         /** 
@@ -168,7 +171,7 @@ export default {
                // Finger move offset Y really.
                let deltaY = touch.clientY - startY;
                // If deltaX more than deltaY, the touch moving is prefer horizontal.
-               isPreferHorizontal = Math.abs(deltaX) > Math.abs(deltaY);
+               isPreferHorizontal = Math.abs(deltaX) / Math.abs(deltaY) > config.preferCoefficient;
                // Page should move offset.
                let offset = startOffset + deltaX;
                // If the offset over left boundary or right bounday.
@@ -188,6 +191,8 @@ export default {
                isMove = true;
                // Set move orient.
                self.setMoveOrient(deltaX);
+               // Apply fade to image.
+               self.setImageFade(true);
            }, false);
 
            // Calculate which page to stay when finger leave from screen.
@@ -209,7 +214,7 @@ export default {
                         if (offset === 0)  return ;
                     }
                     // It is a fast move if the mills is less then 300 mills.
-                    // It will can move next only when fast move width horizontal.
+                    // It will can move next only when fast move with horizontal.
                     // If the isPreferHorizontal is false, I think user don't want to next page.
                     // So, it need to recovery offset x to original position. 
                     if (deltaT < config.fastMoveMills && isPreferHorizontal) { 
@@ -255,6 +260,8 @@ export default {
             setTimeout(() => {
                 // Set current page index.
                 this.setCurrentPageIndex();
+                // Apply fade to image.
+                this.setImageFade(false);
                 // Handle changed event.
                 this.callback(constant.CHANGED);
             }, 100);
@@ -343,6 +350,36 @@ export default {
          */
         setTransform(offset) {
             this.transform = `translate3d(${offset}px, 0, 0)`;
+        },
+
+        /**
+         * Apply fade animation to image when appears.
+         * @param {*} isMove Whether moving.
+         */
+        setImageFade(isMove) {
+            let last = this.cards[this.curIndex - 1];
+            let next = this.cards[this.curIndex + 1];
+
+            let setDisplay = function (el, status) {
+                if (el && el.display !== status) {
+                    el.display = status;
+                }
+            };
+
+            // Moving
+            if (isMove) {
+                if (this.moveOrient === constant.RIGHT) {
+                    setDisplay(last, true);
+                    setDisplay(next, false);
+                } else {
+                    setDisplay(last, false);
+                    setDisplay(next, true);
+                }
+            } else {
+                setDisplay(last, false);
+                setDisplay(next, false);
+                setDisplay(this.current, true);
+            }
         },
 
         /**

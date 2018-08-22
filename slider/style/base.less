@@ -29,6 +29,8 @@ ul, ol {
     -moz-transform: translate(@x, @y);
     transform: translate(@x, @y);
 }
-
-
-
+.transition(@params) {
+    -webkit-transition: @params;
+    -moz-transition: @params;
+    transition: @params;
+}
