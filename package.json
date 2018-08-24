@@ -1,6 +1,6 @@
 {
   "name": "vue-html-slider",
-  "version": "1.0.8",
+  "version": "1.0.9",
   "description": "A simple vue silder component.",
   "main": "slider/index.vue",
   "scripts": {

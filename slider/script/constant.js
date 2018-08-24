@@ -2,7 +2,9 @@
  * @file Constant
  * @author onepixel
  */
-export default {
+'use strict';
+
+module.exports = {
     // The click event.
     CLICK: 'click',
     // The changed event

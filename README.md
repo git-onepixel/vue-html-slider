@@ -6,7 +6,6 @@
 
 A simple vue silder component.
 
-
 [npm]: https://img.shields.io/npm/v/vue-html-slider.svg
 [npm-url]: https://www.npmjs.com/package/vue-html-slider
 [downloads]: https://img.shields.io/npm/dm/vue-html-slider.svg
@@ -26,7 +25,7 @@ yarn add vue-html-slider
 
 ## Usage
 ``` bash
-# Vue template
+# vue template
 <template> 
     <vue-html-slider 
         :images="images" # component props
@@ -38,12 +37,12 @@ yarn add vue-html-slider
     import Slider from 'vue-html-slider';
     export default {
         components: {
-            # Register slider as a html tag
+            # register slider as a html tag
             vue-html-slider: Slider
         },
         data() {
             return {
-                # Image list as array
+                # image list as array
                 images: [
                     {
                         src: 'http://path/to/a.png'
@@ -52,7 +51,7 @@ yarn add vue-html-slider
                         src: 'http://path/to/b.png'
                     }
                 ],
-                # Define slider by userself 
+                # define slider by userself 
                 options: {
                     index: 0,
                     autoplay: false,
@@ -72,13 +71,8 @@ yarn add vue-html-slider
                     longTap(obj) {
                         # obj: {index, src}
                     },
-                    longTapEnd(obj, options) {
+                    longTapEnd(obj) {
                         # obj: {index, src}
-                        # options: {x}
-                    },
-                    pullLeft(obj, options) {
-                        # obj: {index, src}
-                        # options: {x}
                     }
                 }
             }
@@ -108,36 +102,22 @@ yarn add vue-html-slider
 | click | Function | image | A click event fired on image element. |
 | longTap | Function | image |  Long tap event on image element. |
 | longTapEnd | Function | image | When long tap event finished. |
-| pullLeft | Function | image, options | A pull left event fired when moving reached right boundary. | 
-| pullRight | Function | image, options | A pull left event fired when moving reached right boundary. |  
 
 ## Dependence
-The component developed by vue2 with es6 and less, so it need the follow npm packages for running at your code.
+This component developed by vue2 with less, so it need the follow npm packages for running at your code.
 ```
 "devDependencies": {
-    "babel-core": "^6.25.0",
-    "babel-loader": "^7.1.1",
-    "babel-plugin-transform-runtime": "^6.23.0",
-    "babel-preset-es2015": "^6.24.1",
-    "babel-preset-stage-2": "^6.24.1",
-    "babel-runtime": "^6.23.0",
     "css-loader": "^0.28.4",
     "file-loader": "^0.11.2",
-    "html-webpack-plugin": "^2.29.0",
     "less": "^2.7.2",
     "less-loader": "^4.0.4",
     "style-loader": "^0.18.2",
-    "transform-runtime": "0.0.0",
     "url-loader": "^0.5.9",
-    "vue-hot-reload-api": "^2.1.0",
     "vue-html-loader": "^1.2.4",
     "vue-loader": "^13.0.0",
-    "vue-template-compiler": "^2.3.4",
-    "webpack": "^3.0.0",
-    "webpack-dev-server": "^2.5.0"
+    "vue-template-compiler": "^2.3.4"
 },
 "dependencies": {
-    "es6-promise": "^4.1.1",
     "vue": "^2.3.4"
 }
 ```

@@ -24,7 +24,7 @@
     </div>
 </template>
 <script>
-    export { default } from './script/slider';
+    module.exports = require('./script/slider');
 </script>
 <style lang="less" scoped>
     @import url(./style/slider.less);

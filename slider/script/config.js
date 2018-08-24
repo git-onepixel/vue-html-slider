@@ -2,7 +2,9 @@
  * @file Configuration
  * @author onepixel
  */
-export default {
+'use strict';
+
+module.exports = {
     // The css3 transition value.
     transition: 'transform ease 0.3s',
     // Long tap event fired imit mills.

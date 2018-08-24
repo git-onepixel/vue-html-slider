@@ -2,9 +2,9 @@
  * @file Default options for slider props.
  * @author onepixel
  */
-import constant from './constant';
-// Default options
-export default {
+'use strict';
+
+module.exports = {
     // Set default position when slider initialized.
     index: 0, 
     // Set slider whether autoplay, not implement.
@@ -26,29 +26,19 @@ export default {
     // In Debug mode, slider will print some log infos by `console.log`.
     isDebug: false,
     // It fired when page position changed.
-    [constant.CHANGED](obj) {
+    changed: function (obj) {
         // obj: {index, src}
     },
     // A click event fired on image element.
-    [constant.CLICK](obj) {
+    click: function (obj) {
         // obj: {index, src}
     },
     // Long tap event on image element.
-    [constant.LONG_TAP](obj) {
+    longTap: function (obj) {
         // obj: {index, src}
     },
     // It fired when long tap event finished.
-    [constant.LONG_TAP_END](obj) {
+    longTapEnd: function (obj) {
         // obj: {index, src}
-    },
-    // Pull left on the right boundary.
-    [constant.PULL_LEFT](obj, options) {
-        // obj: {index, src}
-        // options: {x}
-    },
-    // Pull right on the left boundary.
-    [constant.PULL_RIGHT](obj, options) {
-        // obj: {index, src}
-        // options: {x}
     }
 }

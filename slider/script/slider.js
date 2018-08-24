@@ -2,12 +2,14 @@
  * @file Slider handler
  * @author onepixel
  */
-import constant from './constant';
-import config from './config';
-import options from './options';
+'use strict';
 
-export default {
-    data() {
+var constant = require('./constant');
+var config = require('./config');
+var options = require('./options');
+
+module.exports = {
+    data: function() {
         return {
             // A images list.
             cards: [],
@@ -33,38 +35,40 @@ export default {
         // A prop for image list
         data: {
             type: Array,
-            default() {
+            default: function () {
                 return [];
             }
         },
         // A configuration for slider
         options: {
             type: Object,
-            default() {
+            default: function () {
                 return options;
             }
         }
     },
     computed: {
         // Current image object.
-        current() {
-            let index = this.pageNow - 1;
+        current: function () {
+            var index = this.pageNow - 1;
             return this.cards[index];
         }
     },
-    mounted() {
+    mounted: function () {
         // The initialization need to delay 300 mills.
-        setTimeout(() => this.initialize(), 300);
+        setTimeout(function () {
+            this.initialize();
+        }.bind(this), 300);
     },
     methods: {
 
         /**
          * Initialization
          */
-        initialize() {
+        initialize: function () {
             // Make the prop data copy to inner variable.
             // As well, add a extra index for every card.
-            this.cards = this.data.map((card, index) => {
+            this.cards = this.data.map(function (card, index) {
                 card.index = index;
                 card.display = false;
                 return card;
@@ -87,9 +91,9 @@ export default {
         /** 
          * Initialize page view.
          */
-        initView() {
+        initView: function () {
             // The default position index.
-            let index = this.options.index || 0;
+            var index = this.options.index || 0;
             this.pageNow = index + 1;
             // Calculate card width.
             this.cardWidth = this.$refs.viewport.offsetWidth;
@@ -106,35 +110,35 @@ export default {
         /** 
          * Bind user touch event.
          */
-        bindTouchEvent() {
-           let self = this; 
+        bindTouchEvent: function () {
+           var self = this; 
            // User touch container.
-           let container =  this.$refs.container;
+           var container =  this.$refs.container;
            // Record current page index.
-           let curOffset = - (this.cardWidth * this.curIndex);
+           var curOffset = - (this.cardWidth * this.curIndex);
            // Initial client x.
-           let startX, startY;
+           var startX, startY;
            // The offset of pressing the screen. 
-           let startOffset = 0;
+           var startOffset = 0;
            // Current move offset.
-           let moveOffset = 0;
+           var moveOffset = 0;
            // Whether triggered `touchmove` event.
-           let isMove = false;
+           var isMove = false;
            // Record mills when finger press the screen.
-           let startT = 0;
+           var startT = 0;
            // Record current touch event whether has been end.
-           let isTouchEnd = true;
+           var isTouchEnd = true;
            // The move offset prefer horizontal.
-           let isPreferHorizontal = false;
+           var isPreferHorizontal = false;
            // `setTimeout` handle.
-           let timer = null;
+           var timer = null;
            // Finger just press on screen.
-           container.addEventListener(constant.TOUCH_START, e => {
+           container.addEventListener(constant.TOUCH_START, function (e) {
                e.preventDefault();
                // Allow single fingers or multiple fingers touch at the same time.
                // Not allow the second finger delay touch.
                if (e.touches.length === 1 || isTouchEnd) {
-                   let touch = e.touches[0];
+                   var touch = e.touches[0];
                    startX = touch.clientX;
                    startY = touch.clientY;
                    // Set initial position before moving.
@@ -150,7 +154,7 @@ export default {
                    // Check whether trigger `touchmove`
                    // If it don't move after 500 mills, I think it triggered `longtap` event.
                    // Otherwise, cancel timer to stop check.
-                   timer = setTimeout(() => {
+                   timer = setTimeout(function () {
                        if (!isMove) {
                           self.callback(constant.LONG_TAP);
                        } else {
@@ -160,23 +164,23 @@ export default {
                }
            }, false);
            // Transform card successive when finger moving on screen.
-           container.addEventListener(constant.TOUCH_MOVE, e => {
+           container.addEventListener(constant.TOUCH_MOVE, function (e) {
                e.preventDefault();
                // If current move is finished, it should terminate the follow actions anyhow.
                if (isTouchEnd) return ; 
                
-               let touch = e.touches[0];
+               var touch = e.touches[0];
                // Finger move offset X really.
-               let deltaX = touch.clientX - startX;
+               var deltaX = touch.clientX - startX;
                // Finger move offset Y really.
-               let deltaY = touch.clientY - startY;
+               var deltaY = touch.clientY - startY;
                // If deltaX more than deltaY, the touch moving is prefer horizontal.
                isPreferHorizontal = Math.abs(deltaX) / Math.abs(deltaY) > config.preferCoefficient;
                // Page should move offset.
-               let offset = startOffset + deltaX;
+               var offset = startOffset + deltaX;
                // If the offset over left boundary or right bounday.
                // It should set offset special.
-               if (offset > 0 || offset < this.maxOffset) {
+               if (offset > 0 || offset < self.maxOffset) {
                    offset = self.getOverBoundaryOffset(startOffset, deltaX); 
                }
                // Calculate effective deltax again. 
@@ -196,13 +200,13 @@ export default {
            }, false);
 
            // Calculate which page to stay when finger leave from screen.
-           container.addEventListener(constant.TOUCH_END, e => {
+           container.addEventListener(constant.TOUCH_END, function (e) {
                e.preventDefault();
-               let offset = 0;
+               var offset = 0;
                // Cancel timer to stop to check.
                timer && clearTimeout(timer); 
                // Calculate mills of finger stay on screen.
-               let deltaT = + new Date() - startT;
+               var deltaT = + new Date() - startT;
                // Moving, and current move event is not end.
                if (isMove && !isTouchEnd) { 
                     // Record current move event has been end. 
@@ -254,23 +258,23 @@ export default {
          * Set current page number.
          * @param {*} offset 
          */
-        setPageNow(offset) {
+        setPageNow: function (offset) {
             this.pageNow = Math.round(Math.abs(offset) / this.cardWidth) + 1;
              // Set page number, it should put DOM operation to asynchronous queue in order to prevent unfluency.
-            setTimeout(() => {
+            setTimeout(function () {
                 // Set current page index.
                 this.setCurrentPageIndex();
                 // Apply fade to image.
                 this.setImageFade(false);
                 // Handle changed event.
                 this.callback(constant.CHANGED);
-            }, 100);
+            }.bind(this), 100);
         },
 
         /**
          * Set current page number index.
          */
-        setCurrentPageIndex() {
+        setCurrentPageIndex: function () {
             this.curIndex = this.pageNow - 1;   
         },
 
@@ -278,7 +282,7 @@ export default {
          * Set move orient.
          * @param {*} deltaX Current move offset x really.
          */
-        setMoveOrient(deltaX) {
+        setMoveOrient: function (deltaX) {
             if (deltaX > 0) {
                 this.moveOrient = constant.RIGHT;
             } else {
@@ -291,8 +295,8 @@ export default {
          * @param {*} curOffset Current offset
          * @param {*} moveOffset Move offset
          */
-        getMoveNextOffset(curOffset, moveOffset) {
-            let offset = 0;
+        getMoveNextOffset: function (curOffset, moveOffset) {
+            var offset = 0;
             // Move to left
             if (this.moveOrient === constant.LEFT) {
                 offset = curOffset - this.cardWidth - moveOffset;
@@ -316,9 +320,9 @@ export default {
          * @param {*} startOffset Start offset
          * @param {*} deltaX Current move offset x really
          */
-        getOverBoundaryOffset(startOffset, deltaX) {
-            let offset = startOffset + deltaX;
-            let options = {};
+        getOverBoundaryOffset: function (startOffset, deltaX) {
+            var offset = startOffset + deltaX;
+            var options = {};
              // The left boundary.
             if (offset > 0) {
                 if (this.options.disableBounce) {
@@ -348,37 +352,42 @@ export default {
          * Using translate3d to turn on GPU hardware to accelerate animation rendering performance. 
          * @param {*} offset translate offset x.
          */
-        setTransform(offset) {
-            this.transform = `translate3d(${offset}px, 0, 0)`;
+        setTransform: function (offset) {
+            this.transform = 'translate3d(' + offset + 'px, 0, 0)';
         },
 
         /**
          * Apply fade animation to image when appears.
-         * @param {*} isMove Whether moving.
+         * @param {*} isMove whether moving.
          */
-        setImageFade(isMove) {
-            let last = this.cards[this.curIndex - 1];
-            let next = this.cards[this.curIndex + 1];
+        setImageFade: function (isMove) {
+            var last = this.cards[this.curIndex - 1];
+            var next = this.cards[this.curIndex + 1];
 
-            let setDisplay = function (el, status) {
-                if (el && el.display !== status) {
-                    el.display = status;
-                }
-            };
-
-            // Moving
             if (isMove) {
                 if (this.moveOrient === constant.RIGHT) {
-                    setDisplay(last, true);
-                    setDisplay(next, false);
+                    this.display(last, true);
+                    this.display(next, false);
                 } else {
-                    setDisplay(last, false);
-                    setDisplay(next, true);
+                    this.display(last, false);
+                    this.display(next, true);
                 }
             } else {
-                setDisplay(last, false);
-                setDisplay(next, false);
-                setDisplay(this.current, true);
+                this.display(last, false);
+                this.display(next, false);
+                this.display(this.current, true);
+            }
+        },
+
+        /**
+         * Set card display
+         * @param {*} card card object of cards.
+         * @param {*} status display or hide.
+         */
+        display: function (card, status) {
+            if (card && card.display !== status) {
+                card.display = status;
+                this.cards = this.cards.slice(0);
             }
         },
 
@@ -386,12 +395,12 @@ export default {
          * Get slider item style.
          * @param {*} index 
          */
-        getStyle(index) {
-            let css = '';
-            let last = this.cards.length - 1 === index;
-            let gapWidth = this.options.gapWidth || 0;
+        getStyle: function (index) {
+            var css = '';
+            var last = this.cards.length - 1 === index;
+            var gapWidth = this.options.gapWidth || 0;
             if (gapWidth && !last) {
-                css = `margin-right: ${gapWidth}px`;
+                css = 'margin-right: ' + gapWidth + 'px';
             }
             return css;
         },
@@ -401,10 +410,10 @@ export default {
          * @param {String} fn method name.
          * @param {Object} options config object.  
          */
-        callback(fn, options) {
-           let self = this;
-           let cb = this.options[fn];
-           let obj = this.current;
+        callback: function (fn, options) {
+           var self = this;
+           var cb = this.options[fn];
+           var obj = this.current;
            if (typeof cb !== 'function') {
                 cb = function (obj, options) {
                     self.log(fn, obj, options);
@@ -417,10 +426,10 @@ export default {
          * Print log infos
          * @param {*} params arguments. 
          */
-        log(...params) {
+        log: function () {
             // Turn on debug mode.
             if (this.options.isDebug) {
-                console.log(...params);
+                console.log.apply(null, arguments);
             }
         }
     }
