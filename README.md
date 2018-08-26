@@ -25,7 +25,7 @@ yarn add vue-html-slider
 
 ## Get Started
 Just one property is required to start the slider. As follows.
-``` bash
+```
 # vue template
 <template> 
     <vue-html-slider :images="images"></vue-html-slider>
