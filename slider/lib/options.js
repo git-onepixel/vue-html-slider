@@ -19,10 +19,16 @@ module.exports = {
     disableBounce: false,
     // Apply a css class to every page of images.
     clsName: '',
-    // Apply fade animation to image when appears.
-    useFade: false,
     // The gap width of images.
     gapWidth: 0,
+    // Apply fade animation to image when appears.
+    useFade: false,
+    // Load image when appears.
+    lazyload: false,
+    // A html template for image loading before loaded.
+    loading: '',
+    // A html template for image load error.
+    error: '',
     // In Debug mode, slider will print some log infos by `console.log`.
     isDebug: false,
     // It fired when page position changed.

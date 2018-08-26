@@ -10,6 +10,17 @@
         white-space: nowrap;
         height:100%;
         font-size: 0;
+        .pull-right-wrapper {
+            position: absolute;
+            left: 0;
+            top: 0;
+            height: 100%;
+            font-size: 0.75rem;
+            .translate(-100%, 0);
+            .flexbox;
+            .flexbox-align-center;
+            .flexbox-pack-center;
+        }
         .card-wrapper {
            display: inline-block;
            vertical-align: middle;
@@ -46,6 +57,31 @@
                     height: 100%;
                 }
            }
+           .loading, .error {
+                position: absolute;
+                left: 0;
+                top: 0;
+                height: 100%;
+                width: 100%;
+                z-index: 100;
+                color: #fff;
+                background: #000;
+                font-size: 0.75rem;
+                .flexbox;
+                .flexbox-align-center;
+                .flexbox-pack-center;
+           }
+        }
+        .pull-left-wrapper {
+            position: absolute;
+            right: 0;
+            top: 0;
+            height: 100%;
+            font-size: 0.75rem;
+            .translate(100%, 0);
+            .flexbox;
+            .flexbox-align-center;
+            .flexbox-pack-center;
         }
     }
     .indicators {

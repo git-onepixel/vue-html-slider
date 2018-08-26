@@ -5,6 +5,7 @@
 'use strict';
 
 module.exports = {
+    name: 'VueHtmlSlider',
     // The css3 transition value.
     transition: 'transform ease 0.3s',
     // Long tap event fired imit mills.
@@ -16,7 +17,5 @@ module.exports = {
     // The transform coefficient when reached slider boundary.
     transformCoefficient: 0.4,
     // The move coefficient decide which page to stay.
-    moveCoefficient: 0.5,
-    // Move prefer x coefficient.
-    preferCoefficient: 0.1
+    moveCoefficient: 0.5
 }
