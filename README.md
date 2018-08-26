@@ -15,11 +15,11 @@ A simple, light and configurable vue silder component.
 
 ## Installation
 use npm
-``` bash
+```
 npm install vue-html-slider
 ```
 use yarn
-``` bash
+```
 yarn add vue-html-slider
 ```
 
