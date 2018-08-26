@@ -53,9 +53,9 @@ Just one property is required to start the slider. As follows.
 </script>
 
 ```
-With the above operation, you can display a beautiful slider.
- 
-<video width="414" height="300" autoplay loop src=""></video>
+With just a few steps, you can get a beautiful slider. As well, there is a online [demo](https://www.duqianduan.com/) which provides a real experience effect for you. 
+
+![avatar](https://static.duqianduan.com/slider/qrcode.png)
  
 ## Advanced
 Slider defines many properties for customizing what you want. You can set a `options` property to slider as follow.
@@ -79,10 +79,10 @@ The `options` contains many properties. All properties are listed below.
 | hideIndicator | Boolen | false | Whether hide page number on bottom of image. As well, it can display 20 indicators at most.| 
 | isDebug | Boolean | false | In Debug mode, slider will print some log infos by `console.log`. |
 | disableBounce | Boolen | false | Whether disable bounce when reached slider boundary. |
-| changed | Function | current image |  It fired when image position changed. |
-| click | Function | current image | A click event fired on image element. |
-| longTap | Function | current image |  Long tap event on image element. |
-| longTapEnd | Function | current image | When long tap event finished. |
+| changed | Function | image |  It will be fired when image position changed. |
+| click | Function | image | A click event fired on image element. |
+| longTap | Function | image |  A `longTap` event on image element. |
+| longTapEnd | Function | image | It will be fired when the `longTap` event completes. |
 
 ## Pull-left / Pull-right
 You can move more when reached slider left or right bounday if you set `disableBounce` false. So, you can listen the event by setting a `pull-left` or `pull-right` property to slider. As follows.

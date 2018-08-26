@@ -39,13 +39,13 @@ module.exports = {
          * @param {*} method method name
          * @param {*} params function params
          */
-        callFn(obj, method, params) {
+        callFn: function (obj, method, params) {
             var fn = obj[method];
             if (typeof fn === 'function') {
                 setTimeout(function () {
                     fn.call(obj, params);
                 }, 300);
             } 
-        },
+        }
     }
 }
