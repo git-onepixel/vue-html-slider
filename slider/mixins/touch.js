@@ -44,6 +44,8 @@ module.exports = {
                     startY = touch.clientY;
                     // Set initial position before moving.
                     startOffset = curOffset;
+                    // Reset moveOffset.
+                    moveOffset = 0;
                     // Initialize `transition`
                     self.transition = '';
                     // Record mills of finger press screen. 
@@ -134,7 +136,9 @@ module.exports = {
                              offset = self.getMoveNextOffset(curOffset, moveOffset);
                          }
                          // Reached left or right boundary.
-                         self.handlePullEvent(offset, moveOffset);
+                         if (moveOffset) {
+                             self.handlePullEvent(startOffset, moveOffset);
+                         } 
                      }
                      // Executing transform to move it to right position.
                      self.setTransform(offset);

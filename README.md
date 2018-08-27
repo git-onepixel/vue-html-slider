@@ -51,7 +51,6 @@ Just one property is required to start the slider. As follows.
         }
     }
 </script>
-
 ```
 With just a few steps, you can get a beautiful slider. As well, there is a online [demo](https://www.duqianduan.com/) which provides a real experience effect for you. 
 
@@ -59,9 +58,11 @@ With just a few steps, you can get a beautiful slider. As well, there is a onlin
  
 ## Advanced
 Slider defines many properties for customizing what you want. You can set a `options` property to slider as follow.
+
 ```
 <vue-html-slider :options="options"></vue-html-slider>
-````
+```
+
 The `options` contains many properties. All properties are listed below.
 
 | Property | Type | default/params | Description | 
@@ -86,20 +87,24 @@ The `options` contains many properties. All properties are listed below.
 
 ## Pull-left / Pull-right
 You can move more when reached slider left or right bounday if you set `disableBounce` false. So, you can listen the event by setting a `pull-left` or `pull-right` property to slider. As follows.
+
 ```
 <vue-html-slider :pull-left="pullLeft" :pull-right="pullRight">
 </vue-html-slider>
-````
+```
 The `pull-left` and `pull-right` have three properties respectively as follows.
+
 | Property | Type | params | Description | 
 | ------ | ------ | ------ | ------ | 
 | tpl | String | - |  A html template will be shown when beyond slider boundary. Characters are also supported. |
 | pull | Function | x | A pull event will be fired continuously before released. |
 | release | Function | x | A release event will be fired when released. |
+
 The `pull` or `release` parameter `x` refers to the distance that page leaves the boundary which is a absolute value.
 
 ## Dependence
 This component is developed by vue2 with less, so it needs the following npm packages for running in your project successfully.
+
 ```
 "devDependencies": {
     "css-loader": "^0.28.4",
