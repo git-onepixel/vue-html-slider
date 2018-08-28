@@ -21,12 +21,12 @@
                 </div>
                 <!--loading-page-->
                 <div class="loading" 
-                     v-if="!card.loaded && options.loading"  
+                     v-if="!card.loaded" 
                      v-html="options.loading">
                 </div>
                 <!--load-error-page-->
-                <div class="error"  
-                     v-if="card.error && options.error" 
+                <div class="error" 
+                     v-if="card.error" 
                      v-html="options.error">
                 </div>
             </li>

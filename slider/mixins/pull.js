@@ -34,10 +34,10 @@ module.exports = {
         },
 
         /**
-         * Call function delay.
-         * @param {*} obj current object
-         * @param {*} method method name
-         * @param {*} params function params
+         * The callback can be executed when the current animation ends.
+         * @param {*} obj current object.
+         * @param {*} method method name.
+         * @param {*} params function params.
          */
         callFn: function (obj, method, params) {
             var fn = obj[method];

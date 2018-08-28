@@ -7,7 +7,7 @@
 var options = require('../lib/options');
 module.exports = {
     props: {
-        // A prop for image list
+        // A prop for image list.
         data: {
             type: Array,
             default: function () {
@@ -19,7 +19,7 @@ module.exports = {
                 ];
             }
         },
-        // A configuration for slider
+        // A configuration for slider.
         options: {
             type: Object,
             default: function () {

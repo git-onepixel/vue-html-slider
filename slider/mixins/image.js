@@ -9,6 +9,7 @@ module.exports = {
     methods: {
         /**
          * Set images dom element to card.
+         * Set 16 mills delay for a fade animation.
          */
         setImageElement: function () {
             var self = this;
@@ -23,7 +24,7 @@ module.exports = {
                     self.loadAllImages();
                 }   
                 self.setImageView(false);
-            }, 0)
+            }, 16);
         },
 
         /**
@@ -31,7 +32,7 @@ module.exports = {
          */
         loadAllImages: function () {
             var self = this;
-            this.cards.forEach(function (card, index) {
+            this.cards.forEach(function (card) {
                 card.el.src = card.src;
                 self.preload(card);
             });
@@ -77,6 +78,7 @@ module.exports = {
             }
             card.el.onerror = function () {
                 card.error = true;
+                card.loaded = true;
                 self.display(card, false)
             }
         },
@@ -89,7 +91,7 @@ module.exports = {
         display: function (card, status) {
             if (card && card.display !== status) {
                 if (status && !card.loaded) {
-                    card.el.src =  card.src
+                    card.el.src = card.src;
                     this.preload(card);
                 } else {
                     card.display = status;

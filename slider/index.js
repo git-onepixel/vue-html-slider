@@ -57,7 +57,6 @@ module.exports = {
          * Initialization
          */
         initialize: function () {
-            var self = this;
             // Make the prop data copy to inner variable.
             // As well, add a extra index for every card.
             this.cards = this.data.map(function (card, index) {
