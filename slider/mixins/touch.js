@@ -9,12 +9,10 @@ var config = require('../lib/config');
 module.exports = {
     methods: {
          /**
-          * Bind user touch event.
+          * Initialize user touch event.
           */
-         bindTouchEvent: function () {
+         initUserTouchEvent: function () {
             var self = this; 
-            // User touch container.
-            var container =  this.$refs.container;
             // Record current page index.
             var curOffset = - (this.cardWidth * this.curIndex);
             // Initial client x.
@@ -34,7 +32,7 @@ module.exports = {
             // `setTimeout` handle.
             var timer = null;
             // Finger just press on screen.
-            container.addEventListener(constant.TOUCH_START, function (e) {
+            var touchstart = function (e) {
                 e.preventDefault();
                 // Allow single fingers or multiple fingers touch at the same time.
                 // Not allow the second finger delay touch.
@@ -65,9 +63,9 @@ module.exports = {
                         }
                     }, config.logTapMills);
                 }
-            }, false);
+            };
             // Transform card successive when finger moving on screen.
-            container.addEventListener(constant.TOUCH_MOVE, function (e) {
+            var touchmove = function (e) {
                 e.preventDefault();
                 // If current move is finished, it should terminate the follow actions anyhow.
                 if (isTouchEnd) return ; 
@@ -101,9 +99,9 @@ module.exports = {
                 self.setMoveOrient(deltaX);
                 // Apply fade to image.
                 self.setImageView(true);
-            }, false);
+            };
             // Calculate which page to stay when finger leave from screen.
-            container.addEventListener(constant.TOUCH_END, function (e) {
+            var touchend = function (e) {
                 e.preventDefault();
                 var offset = 0;
                 // Cancel timer to stop to check.
@@ -158,9 +156,11 @@ module.exports = {
                          }
                      }
                  }
-            }, false);
+            };
+            // Bind all events.
+            this.bindEvent(touchstart, touchmove, touchend);
          },
- 
+
          /**
           * Set current page number.
           * @param {*} offset 
@@ -287,6 +287,18 @@ module.exports = {
                  }
             }
             cb(obj, options);
+         },
+
+         /**
+          * Bind event.
+          */
+         bindEvent: function (touchstart, touchmove, touchend) {
+            // User touch container.
+            var el =  this.$refs.container;
+            el.addEventListener(constant.TOUCH_START, touchstart, false);
+            el.addEventListener(constant.TOUCH_MOVE, touchmove, false);
+            el.addEventListener(constant.TOUCH_END, touchend, false);
+            el.addEventListener(constant.TOUCH_CANCEL, touchend, false);
          },
  
          /** 

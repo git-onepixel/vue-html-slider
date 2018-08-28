@@ -23,6 +23,8 @@ module.exports = {
     TOUCH_MOVE: 'touchmove',
     // The touchend event.
     TOUCH_END: 'touchend',
+    // The touchcancel event.
+    TOUCH_CANCEL: 'touchcancel',
     // The move orient left.
     LEFT: 1,
     // The move orient right.

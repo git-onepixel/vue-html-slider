@@ -65,7 +65,6 @@ module.exports = {
                 card.display = false;
                 card.loaded = false;
                 card.error = false;
-                card.displayUrl = self.options.lazyload ? '' : card.src;
                 card.el = null; 
                 return card;
             });
@@ -101,8 +100,8 @@ module.exports = {
             this.setCurrentPageIndex();
             // Handle default event.
             this.callback(constant.CHANGED); 
-            // Bind user touch event.
-            this.bindTouchEvent();
+            // Initialize user touch event.
+            this.initUserTouchEvent();
         }
     }
 }

@@ -17,12 +17,18 @@
                 :style="getStyle(index)" 
                 :key="index">
                 <div class="card" :class="options.clsName">
-                    <img :alt="card.title" :src="card.displayUrl">
+                    <img :alt="card.title">
                 </div>
                 <!--loading-page-->
-                <div v-if="!card.loaded" class="loading" v-html="options.loading"></div>
+                <div class="loading" 
+                     v-if="!card.loaded && options.loading"  
+                     v-html="options.loading">
+                </div>
                 <!--load-error-page-->
-                <div v-if="card.error" class="error" v-html="options.error"></div>
+                <div class="error"  
+                     v-if="card.error && options.error" 
+                     v-html="options.error">
+                </div>
             </li>
 
             <!--pull-left-wrapper-->

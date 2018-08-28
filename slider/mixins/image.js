@@ -32,12 +32,8 @@ module.exports = {
         loadAllImages: function () {
             var self = this;
             this.cards.forEach(function (card, index) {
-                if (card.el.complete) {
-                    card.loaded = true;
-                    self.display(card, index === self.curIndex);
-                } else {
-                    self.preload(card);
-                }
+                card.el.src = card.src;
+                self.preload(card);
             });
         },
 
@@ -65,6 +61,27 @@ module.exports = {
         },
 
         /**
+         * Preload image when appears.
+         * @param card image object.
+         */
+        preload: function (card) {
+            var self = this;
+            if (card.el.complete) {
+                card.loaded = true;
+                self.display(card, true);
+            } else {
+                card.el.onload = function () {
+                    card.loaded = true;
+                    self.display(card, card.index === self.curIndex);
+                }
+            }
+            card.el.onerror = function () {
+                card.error = true;
+                self.display(card, false)
+            }
+        },
+
+        /**
          * Set card display
          * @param {*} card card object of cards.
          * @param {*} status display or hide.
@@ -72,28 +89,12 @@ module.exports = {
         display: function (card, status) {
             if (card && card.display !== status) {
                 if (status && !card.loaded) {
-                    card.displayUrl = card.src;
+                    card.el.src =  card.src
                     this.preload(card);
                 } else {
                     card.display = status;
+                    this.cards = this.cards.slice(0);
                 }
-                this.cards = this.cards.slice(0);
-            }
-        },
-
-        /**
-         * Preload image when appears.
-         * @param card image object.
-         */
-        preload: function (card) {
-            var self = this;
-            card.el.onload = function () {
-                card.loaded = true;
-                self.display(card, card.index === self.curIndex);
-            }
-            card.el.onerror = function () {
-                card.error = true;
-                self.cards = self.cards.slice(0);
             }
         }
     }
