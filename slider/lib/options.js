@@ -25,6 +25,8 @@ module.exports = {
     useFade: false,
     // Load image when appears.
     lazyload: false,
+    // You can zoom picture scale by gesture if set true.
+    zoom: false,
     // A html template for image loading before loaded.
     loading: '',
     // A html template for image load error.

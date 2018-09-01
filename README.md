@@ -61,6 +61,20 @@ Slider defines many properties for customizing what you want. You can set a `opt
 
 ```
 <vue-html-slider :options="options"></vue-html-slider>
+...
+data() {
+    return {
+        options: {
+            index: 0,
+            lazyload: true,
+            useFade: true,
+            click() {
+                # user click event callback.
+            },
+            ...
+        }
+    }
+}
 ```
 
 The `options` contains many properties. All properties are listed below.
@@ -75,6 +89,7 @@ The `options` contains many properties. All properties are listed below.
 | gapWidth | Number | 0 | You can set a gap between each image.|
 | useFade | Boolean | false | Apply fade animation to image when appears. |
 | lazyload | Boolean | false | The image will be loaded only appears, if true. |
+| zoom | Boolean | false | You can zoom picture scale by gesture if set true, not implement.|
 | loading | String | - | It will be shown before loaded. A html template or characters are supported.| 
 | error | String | - | It will be shown after load error. A html template or characters are supported.|   
 | hideIndicator | Boolen | false | Whether hide page number on bottom of image. As well, it can display 20 indicators at most.| 
@@ -86,11 +101,27 @@ The `options` contains many properties. All properties are listed below.
 | longTapEnd | Function | image | It will be fired when the `longTap` event completes. |
 
 ## Pull-left / Pull-right
-You can move more when reached slider left or right bounday if you set `disableBounce` false. So, you can listen the event by setting a `pull-left` or `pull-right` property to slider. As follows.
+You can move more when reached slider left or right boundary if you set `disableBounce` false. So, you can listen the event by setting a `pull-left` or `pull-right` property to slider. As follows.
 
 ```
-<vue-html-slider :pull-left="pullLeft" :pull-right="pullRight">
+<vue-html-slider :pull-left="pullLeft" 
+    :pull-right="pullRight">
 </vue-html-slider>
+...
+data() {
+    return {
+        pullLeft: {
+            tpl: '<div class="foo">query all</div>',
+            pull(x) {
+                # pulling continuously.
+            },
+            release(x) {
+                # released.
+            }
+        },
+        ...
+    }
+}
 ```
 The `pull-left` and `pull-right` have three properties respectively as follows.
 
