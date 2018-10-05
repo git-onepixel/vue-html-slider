@@ -15,7 +15,7 @@ module.exports = {
     // Fast move event limit mills.
     fastMoveMills: 300,
     // The transform coefficient when reached slider boundary.
-    transformCoefficient: 0.4,
+    transformCoefficient: 0.35,
     // The move coefficient decide which page to stay.
     moveCoefficient: 0.5
 }
