@@ -34,7 +34,6 @@ Just one property is required to start the slider. As follows.
     import vueHtmlSlider from 'vue-html-slider';
     export default {
         components: {
-            # register `vueHtmlSlider` as a html tag.
             vue-html-slider: vueHtmlSlider
         },
         data() {
@@ -53,7 +52,7 @@ With just a few steps, you can get a slider. As well, there is an online [demo](
 ![avatar](https://static.duqianduan.com/slider/qrcode.png)
  
 ## Advanced
-Slider defines many properties for customizing what you want. You can set an `options` property to slider as follow.
+Slider defines many properties for customizing what you want. You can set the `options` property to slider as follow.
 
 ```
 <vue-html-slider :options="options"></vue-html-slider>
@@ -97,12 +96,10 @@ The `options` contains many properties. All properties are listed below.
 | longTapEnd | Function | image | It will be fired when the `longTap` event completes. |
 
 ## Pull-left / Pull-right
-You can move more when reached slider left or right boundary if you set `disableBounce` false. So, you can listen the event by setting `pull-left` or `pull-right` property to slider. As follows.
+You can move more when reached slider left or right boundary if you set `disableBounce` false. So, you can listen the event by setting the `pull-left` or `pull-right` property to slider. As follows.
 
 ```
-<vue-html-slider :pull-left="pullLeft" 
-    :pull-right="pullRight">
-</vue-html-slider>
+<vue-html-slider :pull-left="pullLeft" :pull-right="pullRight"></vue-html-slider>
 ...
 data() {
     return {

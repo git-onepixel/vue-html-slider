@@ -75,7 +75,7 @@ module.exports = {
                 } else {
                     // Discard the invalid image object.
                 }
-            });
+            }.bind(this));
             // The `mounted` method will be called again when the component destroyed.
             // What's different from first called is that the html DOM is destroyed.
             // So, you need ensure the DOM object available before initialization.  
