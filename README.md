@@ -28,36 +28,32 @@ Just one property is required to start the slider. As follows.
 ```
 # vue template
 <template> 
-    <vue-html-slider :images="images"></vue-html-slider>
+    <vue-html-slider :data="images"></vue-html-slider>
 </template>
 <script>
-    import Slider from 'vue-html-slider';
+    import vueHtmlSlider from 'vue-html-slider';
     export default {
         components: {
-            # register slider as a html tag.
-            vue-html-slider: Slider
+            # register `vueHtmlSlider` as a html tag.
+            vue-html-slider: vueHtmlSlider
         },
         data() {
             return {
                 images: [
-                    {
-                        src: 'http://path/to/a.png'
-                    },
-                    {
-                        src: 'http://path/to/b.png'
-                    }
+                    'http://path/to/a.png',
+                    'http://path/to/b.png'
                 ]
             }
         }
     }
 </script>
 ```
-With just a few steps, you can get a beautiful slider. As well, there is a online [demo](https://www.duqianduan.com/) which provides a real experience effect for you. 
+With just a few steps, you can get a slider. As well, there is an online [demo](https://www.duqianduan.com/slider/index.html) which provides a real experience for you. 
 
 ![avatar](https://static.duqianduan.com/slider/qrcode.png)
  
 ## Advanced
-Slider defines many properties for customizing what you want. You can set a `options` property to slider as follow.
+Slider defines many properties for customizing what you want. You can set an `options` property to slider as follow.
 
 ```
 <vue-html-slider :options="options"></vue-html-slider>
@@ -101,7 +97,7 @@ The `options` contains many properties. All properties are listed below.
 | longTapEnd | Function | image | It will be fired when the `longTap` event completes. |
 
 ## Pull-left / Pull-right
-You can move more when reached slider left or right boundary if you set `disableBounce` false. So, you can listen the event by setting a `pull-left` or `pull-right` property to slider. As follows.
+You can move more when reached slider left or right boundary if you set `disableBounce` false. So, you can listen the event by setting `pull-left` or `pull-right` property to slider. As follows.
 
 ```
 <vue-html-slider :pull-left="pullLeft" 
@@ -131,27 +127,8 @@ The `pull-left` and `pull-right` have three properties respectively as follows.
 | pull | Function | x | A pull event will be fired continuously before released. |
 | release | Function | x | A release event will be fired when released. |
 
-The `pull` or `release` parameter `x` refers to the distance that page leaves the boundary which is a absolute value.
+The `pull` or `release` parameter `x` refers to the distance that page leaves the boundary which is an absolute value.
 
-## Dependence
-This component is developed by vue2 with less, so it needs the following npm packages for running in your project successfully.
-
-```
-"devDependencies": {
-    "css-loader": "^0.28.4",
-    "file-loader": "^0.11.2",
-    "less": "^2.7.2",
-    "less-loader": "^4.0.4",
-    "style-loader": "^0.18.2",
-    "url-loader": "^0.5.9",
-    "vue-html-loader": "^1.2.4",
-    "vue-loader": "^13.0.0",
-    "vue-template-compiler": "^2.3.4"
-},
-"dependencies": {
-    "vue": "^2.3.4"
-}
-```
 As well, in order to apply it in your project easily, a vue demo project for this component. See [slider-demo](https://github.com/git-onepixel/slider-demo) for help.
 
 ## License

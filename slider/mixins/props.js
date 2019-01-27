@@ -7,7 +7,8 @@
 var options = require('../lib/options');
 module.exports = {
     props: {
-        // A prop for image list.
+        // A prop for image list. 
+        // A string value for image url be supported as well.
         data: {
             type: Array,
             default: function () {

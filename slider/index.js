@@ -58,20 +58,51 @@ module.exports = {
          */
         initialize: function () {
             // Make the prop data copy to inner variable.
-            // As well, add a extra index for every card.
-            this.cards = this.data.map(function (card, index) {
-                card.index = index;
-                card.display = false;
-                card.loaded = false;
-                card.error = false;
-                card.el = null; 
-                return card;
+            // As well, add an extra index for every card.
+            this.cards = [];
+            
+            this.data.forEach(function (image, index) {
+                // create a valid card object.
+                var card = this.createValidCard(image);
+
+                if (card) {
+                    card.index = index;
+                    card.display = false;
+                    card.loaded = false;
+                    card.error = false;
+                    card.el = null;
+                    this.cards.push(card);
+                } else {
+                    // Discard the invalid image object.
+                }
             });
             // The `mounted` method will be called again when the component destroyed.
             // What's different from first called is that the html DOM is destroyed.
             // So, you need ensure the DOM object available before initialization.  
             if (this.$refs.container) {
                 this.render();
+            }
+        },
+
+        /**
+         * Create a card object with a valid image url.
+         * @param {*} image image object or image url
+         */
+        createValidCard: function (image) {
+            image = image || {};
+            var card = {};
+            if (typeof image === 'string') {
+                card.src = image;
+            } else {
+                card = image;
+            }
+            if (card.src) {
+                return card;
+            }
+            // an invalid image url 
+            else {
+                // returns a null value to indicate an invalid value
+                return null;
             }
         },
         
