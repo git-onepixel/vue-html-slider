@@ -2,17 +2,17 @@
  * @file pull
  * @author onepixel
  */
-'use strict';
 
-var constant = require('../lib/constant');
-module.exports = {
+import constant from '../lib/constant';
+
+export default {
     methods: {
         /**
          * Handle pull event.
          * @param offset the offset should transform.
          * @param moveOffset the real move offset.
          */
-        handlePullEvent: function (offset, moveOffset) {
+        handlePullEvent(offset, moveOffset) {
             if (this.options.disableBounce) {
                 return false;
             }
@@ -39,10 +39,10 @@ module.exports = {
          * @param {*} method method name.
          * @param {*} params function params.
          */
-        callFn: function (obj, method, params) {
+        callFn(obj, method, params) {
             var fn = obj[method];
             if (typeof fn === 'function') {
-                setTimeout(function () {
+                setTimeout(() => {
                     fn.call(obj, params);
                 }, 300);
             } 

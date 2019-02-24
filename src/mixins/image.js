@@ -2,39 +2,38 @@
  * @file image.
  * @author onepixel
  */
-'use strict';
 
-var constant = require('../lib/constant');
-module.exports = {
+import constant from '../lib/constant';
+
+export default {
     methods: {
         /**
          * Set images dom element to card.
          * Set 16 mills delay for a fade animation.
          */
-        setImageElement: function () {
+        setImageElement() {
             var self = this;
             var el = this.$refs.container;
-            setTimeout(function () {
+            setTimeout(() => {
                 var images = el.querySelectorAll('img');
-                self.cards.forEach(function (card, index) {
+                this.cards.forEach((card, index) => {
                     card.el = images[index];
                 });
                 // Load all images if disable lazyload.
                 if (!self.options.lazyload) {
-                    self.loadAllImages();
+                    this.loadAllImages();
                 }   
-                self.setImageView(false);
+                this.setImageView(false);
             }, 16);
         },
 
         /**
          * Load all images now.
          */
-        loadAllImages: function () {
-            var self = this;
-            this.cards.forEach(function (card) {
+        loadAllImages() {
+            this.cards.forEach(card => {
                 card.el.src = card.src;
-                self.preload(card);
+                this.preload(card);
             });
         },
 
@@ -42,7 +41,7 @@ module.exports = {
          * Set image display or hide when appears.
          * @param {*} isMove whether moving.
          */
-        setImageView: function (isMove) {
+        setImageView(isMove) {
             var last = this.cards[this.curIndex - 1];
             var next = this.cards[this.curIndex + 1];
 

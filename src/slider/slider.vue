@@ -48,8 +48,8 @@
     </div>
 </template>
 <script>
-    module.exports = require('./slider');
+    export { default } from './slider';
 </script>
 <style lang="less" scoped>
-    @import url(./slider/css/index.less);
+    @import '../css/index.less';
 </style>

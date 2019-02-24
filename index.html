@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Slider</title>
+    <meta charset="utf-8" name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <style>
+        * {
+            margin: 0;
+            padding: 0
+        }
+
+        .slider-demo-layer {
+            position: fixed;
+            width: 100%;
+            height: 100%;
+            background: #000;
+        }
+
+        .slider-wrapper {
+            position: absolute;
+            top: 0;
+            width: 100%;
+            height: 100%;
+        }
+
+        .query-more {
+            margin: 0 1rem;
+            color: #fff;
+            width: 12px;
+            height: 100%;
+            white-space: normal;
+            line-height: 1.2;
+            font-size: 12px;
+            position: relative;
+        }
+
+        .query-more span {
+            display: block;
+            position: absolute;
+            top: 50%;
+            width: 100%;
+            transform: translateY(-50%);
+        }
+
+        .query-more.release span::before {
+            content: "←";
+        }
+
+        .query-more.pull span::before {
+            content: "→";
+        }
+
+        .loading-view {
+            width: 100%;
+            height: 100%;
+            background: url(src/img/loading.gif) no-repeat;
+            background-size: 1rem 1rem;
+            background-position: center center;
+        }
+
+        .load-error {
+            position: absolute;
+            top: 50%;
+            width: 100%;
+            transform: translateY(-50%);
+            text-align: center;
+        }
+
+        .autopic img {
+            height: auto !important
+        }
+    </style>
+</head>
+<body>
+    <div id="app" class="slider-demo-layer">
+         <div class="slider-wrapper">
+            <vue-html-slider  
+                v-if="images.length" 
+                :data="images"
+                :options="options"
+                :pull-right="pullRight">
+            </vue-html-slider>
+       </div>   
+    </div>
+</body>
+</html>

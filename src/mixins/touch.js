@@ -2,42 +2,45 @@
  * @file event.
  * @author onepixel
  */
-'use strict';
 
-var constant = require('../lib/constant');
-var config = require('../lib/config');
-module.exports = {
+import constant from '../lib/constant';
+import config from '../lib/config';
+import helper from '../lib/helper';
+
+export default {
     methods: {
          /**
           * Initialize user touch event.
           */
-         initUserTouchEvent: function () {
-            var self = this; 
+         initUserTouchEvent() {
+            let self = this; 
+            // User touch container.
+            let el =  this.$refs.container;
             // Record current page index.
-            var curOffset = - (this.cardWidth * this.curIndex);
+            let curOffset = - (this.cardWidth * this.curIndex);
             // Initial client x.
-            var startX, startY;
+            let startX, startY;
             // The offset of pressing the screen. 
-            var startOffset = 0;
+            let startOffset = 0;
             // Current move offset.
-            var moveOffset = 0;
+            let moveOffset = 0;
             // Whether triggered `touchmove` event.
-            var isMove = false;
+            let isMove = false;
             // Record mills when finger press the screen.
-            var startT = 0;
+            let startT = 0;
             // Record current touch event whether has been end.
-            var isTouchEnd = true;
+            let isTouchEnd = true;
             // The move offset prefer horizontal.
-            var isPreferHorizontal = false;
+            let isPreferHorizontal = false;
             // `setTimeout` handle.
-            var timer = null;
+            let timer = null;
             // Finger just press on screen.
-            var touchstart = function (e) {
+            helper.bindEvent(el, constant.TOUCH_START, function (e) {
                 e.preventDefault();
                 // Allow single fingers or multiple fingers touch at the same time.
                 // Not allow the second finger delay touch.
                 if (e.touches.length === 1 || isTouchEnd) {
-                    var touch = e.touches[0];
+                    let touch = e.touches[0];
                     startX = touch.clientX;
                     startY = touch.clientY;
                     // Set initial position before moving.
@@ -55,7 +58,7 @@ module.exports = {
                     // Check whether trigger `touchmove`
                     // If it don't move after 500 mills, I think it triggered `longtap` event.
                     // Otherwise, cancel timer to stop check.
-                    timer = setTimeout(function () {
+                    timer = setTimeout(() => {
                         if (!isMove) {
                            self.callback(constant.LONG_TAP);
                         } else {
@@ -63,22 +66,22 @@ module.exports = {
                         }
                     }, config.logTapMills);
                 }
-            };
+            });
             // Transform card successive when finger moving on screen.
-            var touchmove = function (e) {
+            helper.bindEvent(el, constant.TOUCH_MOVE, function (e) {
                 e.preventDefault();
                 // If current move is finished, it should terminate the follow actions anyhow.
                 if (isTouchEnd) return ; 
                 
-                var touch = e.touches[0];
+                let touch = e.touches[0];
                 // Finger move offset X really.
-                var deltaX = touch.clientX - startX;
+                let deltaX = touch.clientX - startX;
                 // Finger move offset Y really.
-                var deltaY = touch.clientY - startY;
+                let deltaY = touch.clientY - startY;
                 // If deltaX more than deltaY, the touch moving is prefer horizontal.
                 isPreferHorizontal = Math.abs(deltaX) > Math.abs(deltaY);
                 // Page should move offset.
-                var offset = startOffset + deltaX;
+                let offset = startOffset + deltaX;
                 // If the offset over left boundary or right bounday.
                 // It should set offset special.
                 if (offset > 0 || offset < self.maxOffset) {
@@ -99,15 +102,15 @@ module.exports = {
                 self.setMoveOrient(deltaX);
                 // Apply fade to image.
                 self.setImageView(true);
-            };
+            });
             // Calculate which page to stay when finger leave from screen.
-            var touchend = function (e) {
+            helper.bindEvent(el, [constant.TOUCH_END, constant.TOUCH_CANCEL], function (e) {
                 e.preventDefault();
-                var offset = 0;
+                let offset = 0;
                 // Cancel timer to stop to check.
                 timer && clearTimeout(timer); 
                 // Calculate mills of finger stay on screen.
-                var deltaT = + new Date() - startT;
+                let deltaT = + new Date() - startT;
                 // Moving, and current move event is not end.
                 if (isMove && !isTouchEnd) { 
                      // Record current move event has been end. 
@@ -156,16 +159,14 @@ module.exports = {
                          }
                      }
                  }
-            };
-            // Bind all events.
-            this.bindEvent(touchstart, touchmove, touchend);
+            });
          },
 
          /**
           * Set current page number.
           * @param {*} offset 
           */
-         setPageNow: function (offset) {
+         setPageNow(offset) {
              this.pageNow = Math.round(Math.abs(offset) / this.cardWidth) + 1;
              // Set page number, it should put DOM operation to asynchronous queue in order to prevent unfluency.
              setTimeout(function () {
@@ -181,7 +182,7 @@ module.exports = {
          /**
           * Set current page number index.
           */
-         setCurrentPageIndex: function () {
+         setCurrentPageIndex() {
              this.curIndex = this.pageNow - 1;   
          },
  
@@ -189,7 +190,7 @@ module.exports = {
           * Set move orient.
           * @param {*} deltaX Current move offset x really.
           */
-         setMoveOrient: function (deltaX) {
+         setMoveOrient(deltaX) {
              if (deltaX > 0) {
                  this.moveOrient = constant.RIGHT;
              } else {
@@ -202,8 +203,8 @@ module.exports = {
           * @param {*} curOffset Current offset
           * @param {*} moveOffset Move offset
           */
-         getMoveNextOffset: function (curOffset, moveOffset) {
-             var offset = 0;
+         getMoveNextOffset(curOffset, moveOffset) {
+             let offset = 0;
              // Move to left
              if (this.moveOrient === constant.LEFT) {
                  offset = curOffset - this.cardWidth - moveOffset;
@@ -227,8 +228,8 @@ module.exports = {
           * @param {*} startOffset Start offset
           * @param {*} deltaX Current move offset x really
           */
-         getOverBoundaryOffset: function (startOffset, deltaX) {
-             var offset = startOffset + deltaX;
+         getOverBoundaryOffset(startOffset, deltaX) {
+             let offset = startOffset + deltaX;
              // The left boundary.
              if (offset > 0) {
                  if (this.options.disableBounce) {
@@ -254,7 +255,7 @@ module.exports = {
           * Using translate3d to turn on GPU hardware to accelerate animation rendering performance. 
           * @param {*} offset translate offset x.
           */
-         setTransform: function (offset) {
+         setTransform(offset) {
              this.transform = 'translate3d(' + offset + 'px, 0, 0)';
          },
  
@@ -262,10 +263,10 @@ module.exports = {
           * Get slider item style.
           * @param {*} index 
           */
-         getStyle: function (index) {
-             var css = '';
-             var last = this.cards.length - 1 === index;
-             var gapWidth = this.options.gapWidth || 0;
+         getStyle(index) {
+             let css = '';
+             let last = this.cards.length - 1 === index;
+             let gapWidth = this.options.gapWidth || 0;
              if (gapWidth && !last) {
                  css = 'margin-right: ' + gapWidth + 'px';
              }
@@ -277,10 +278,10 @@ module.exports = {
           * @param {String} fn method name.
           * @param {Object} options config object.  
           */
-         callback: function (fn, options) {
-            var self = this;
-            var cb = this.options[fn];
-            var obj = this.current;
+         callback(fn, options) {
+            let self = this;
+            let cb = this.options[fn];
+            let obj = this.current;
             if (typeof cb !== 'function') {
                  cb = function (obj, options) {
                      self.log(fn, obj, options);
@@ -289,22 +290,10 @@ module.exports = {
             cb(obj, options);
          },
 
-         /**
-          * Bind event.
-          */
-         bindEvent: function (touchstart, touchmove, touchend) {
-            // User touch container.
-            var el =  this.$refs.container;
-            el.addEventListener(constant.TOUCH_START, touchstart, false);
-            el.addEventListener(constant.TOUCH_MOVE, touchmove, false);
-            el.addEventListener(constant.TOUCH_END, touchend, false);
-            el.addEventListener(constant.TOUCH_CANCEL, touchend, false);
-         },
- 
          /** 
           * Print log infos
           */
-         log: function () {
+         log() {
              // Turn on debug mode.
              if (this.options.isDebug) {
                  console.log.apply(null, arguments);

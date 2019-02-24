@@ -2,17 +2,17 @@
  * @file Slider handler
  * @author onepixel
  */
-'use strict';
 
-var constant = require('./lib/constant');
-var config = require('./lib/config');
-var mixins = require('./mixins');
+import constant from '../lib/constant';
+import config from '../lib/config';
+import mixins from '../mixins';
+import helper from '../lib/helper';
 
-module.exports = {
+export default {
 
     name: config.name,
 
-    data: function() {
+    data() {
         return {
             // A images list.
             cards: [],
@@ -40,30 +40,30 @@ module.exports = {
     mixins: mixins,
     
     computed: {
-        current: function () {
-            var index = this.pageNow - 1;
+        current() {
+            let index = this.pageNow - 1;
             return this.cards[index];
         }
     },
-    mounted: function () {
+    mounted() {
         // The initialization need to delay 300 mills.
-        setTimeout(function () {
+        setTimeout(() => {
             this.initialize();
-        }.bind(this), 300);
+        }, 300);
     },
     methods: {
 
         /**
          * Initialization
          */
-        initialize: function () {
+        initialize() {
             // Make the prop data copy to inner variable.
             // As well, add an extra index for every card.
             this.cards = [];
             
-            this.data.forEach(function (image, index) {
+            this.data.forEach((image, index) => {
                 // create a valid card object.
-                var card = this.createValidCard(image);
+                let card = helper.createSliderCard(image);
 
                 if (card) {
                     card.index = index;
@@ -75,7 +75,7 @@ module.exports = {
                 } else {
                     // Discard the invalid image object.
                 }
-            }.bind(this));
+            });
             // The `mounted` method will be called again when the component destroyed.
             // What's different from first called is that the html DOM is destroyed.
             // So, you need ensure the DOM object available before initialization.  
@@ -84,34 +84,12 @@ module.exports = {
             }
         },
 
-        /**
-         * Create a card object with a valid image url.
-         * @param {*} image image object or image url
-         */
-        createValidCard: function (image) {
-            image = image || {};
-            var card = {};
-            if (typeof image === 'string') {
-                card.src = image;
-            } else {
-                card = image;
-            }
-            if (card.src) {
-                return card;
-            }
-            // an invalid image url 
-            else {
-                // returns a null value to indicate an invalid value
-                return null;
-            }
-        },
-        
         /** 
          * Render slider.
          */
-        render: function () {
+        render() {
             // The default position index.
-            var index = this.options.index || 0;
+            let index = this.options.index || 0;
             // Current page number.
             this.pageNow = index + 1;
             // Display tpl if provided.    

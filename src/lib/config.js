@@ -2,9 +2,8 @@
  * @file Configuration
  * @author onepixel
  */
-'use strict';
 
-module.exports = {
+export default {
     name: 'VueHtmlSlider',
     // The css3 transition value.
     transition: 'transform ease 0.3s',

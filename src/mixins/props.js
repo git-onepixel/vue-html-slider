@@ -2,16 +2,16 @@
  * @file props
  * @author onepixel
  */
-'use strict';
 
-var options = require('../lib/options');
-module.exports = {
+import options from '../lib/options';
+
+export default {
     props: {
         // A prop for image list. 
         // A string value for image url be supported as well.
         data: {
             type: Array,
-            default: function () {
+            default() {
                 return [
                     {
                         title: '',
@@ -23,35 +23,35 @@ module.exports = {
         // A configuration for slider.
         options: {
             type: Object,
-            default: function () {
+            default() {
                 return options;
             }
         },
         // Pull left when reached right boundary.
         pullLeft: {
             type: Object,
-            default: function () {
+            default() {
                 return {
                     // html template
                     tpl: '', 
                     // pulling before release.
-                    pull: function (x) {},
+                    pull() {},
                     // pull end
-                    release: function () {}
+                    release() {}
                 }
             }
         },
         // Pull right when reached left boundary.
         pullRight: {
             type: Object,
-            default: function () {
+            default() {
                 return {
                     // html template
                     tpl: '', 
                     // pulling before release.
-                    pull: function (x) {},
+                    pull(x) {},
                     // pull end
-                    release: function () {}
+                    release() {}
                 }
             }
         }
