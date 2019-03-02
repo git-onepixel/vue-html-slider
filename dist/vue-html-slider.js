@@ -1,5 +1,5 @@
 /*!
- * vue-html-slider v1.2.1
+ * vue-html-slider v1.2.2
  * https://github.com/git-onepixel/vue-html-slider#readme
  * Copyright(c) 2018-2019, Onepixel<onepixel@126.com>
  * Released under the MIT License.

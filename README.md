@@ -24,9 +24,9 @@ yarn add vue-html-slider
 ```
 
 ## Get Started
-Just one property is required to start the slider. As follows.
-``` bash
-# vue template
+Just one property is required to start the slider as follows.
+``` html
+<!--vue template-->
 <template> 
     <vue-html-slider :data="images"></vue-html-slider>
 </template>
@@ -34,7 +34,7 @@ Just one property is required to start the slider. As follows.
     import vueHtmlSlider from 'vue-html-slider';
     export default {
         components: {
-            vue-html-slider: vueHtmlSlider
+            'vue-html-slider': vueHtmlSlider
         },
         data() {
             return {
@@ -47,29 +47,35 @@ Just one property is required to start the slider. As follows.
     }
 </script>
 ```
-With just a few steps, you can get a slider. As well, there is an online [demo](https://www.duqianduan.com/slider/index.html) which provides a real experience for you. 
+With just a few steps, you can create a slider application. As well, there is an online [demo](https://www.duqianduan.com/slider/index.html) which provides a real experience for you. 
 
 ![avatar](https://static.duqianduan.com/slider/qrcode.png)
  
 ## Advanced
-Slider defines many properties for customizing what you want. You can set the `options` property to slider as follow.
+Slider defines many properties for customizing what you want. You can set the `options` property to slider as follows.
 
-``` bash
-<vue-html-slider :options="options"></vue-html-slider>
-...
-data() {
-    return {
-        options: {
-            index: 0,
-            lazyload: true,
-            useFade: true,
-            click() {
-                # user click event callback.
-            },
-            ...
+``` html
+<template> 
+    <vue-html-slider :options="options"></vue-html-slider>
+</template>
+<script>
+    // ...
+    export default {
+        // ...
+        data() {
+            return {
+                options: {
+                    index: 0,
+                    lazyload: true,
+                    useFade: true,
+                    click() {
+                        // user click event callback.
+                    }
+                }
+            }
         }
     }
-}
+</script>
 ```
 
 The `options` contains many properties. All properties are listed below.
@@ -96,25 +102,31 @@ The `options` contains many properties. All properties are listed below.
 | longTapEnd | Function | image | It will be fired when the `longTap` event completes. |
 
 ## Pull-left / Pull-right
-You can move more when reached slider left or right boundary if you set `disableBounce` false. So, you can listen the event by setting the `pull-left` or `pull-right` property to slider. As follows.
+You can move more when reached slider left or right boundary if you set `disableBounce` false. So, you can listen the event by setting the `pull-left` or `pull-right` property to slider as follows.
 
-``` bash
-<vue-html-slider :pull-left="pullLeft" :pull-right="pullRight"></vue-html-slider>
-...
-data() {
-    return {
-        pullLeft: {
-            tpl: '<div class="foo">query all</div>',
-            pull(x) {
-                # pulling continuously.
-            },
-            release(x) {
-                # released.
+``` html
+<template>
+    <vue-html-slider :pull-left="pullLeft"></vue-html-slider>
+</template>
+<script>
+    // ...
+    export default {
+        // ...
+        data() {
+            return {
+                pullLeft: {
+                    tpl: '<div class="foo">query all</div>',
+                    pull(x) {
+                        // pulling continuously.
+                    },
+                    release(x) {
+                        // released.
+                    }
+                }
             }
-        },
-        ...
+        }
     }
-}
+</script>
 ```
 The `pull-left` and `pull-right` have three properties respectively as follows.
 
@@ -124,7 +136,7 @@ The `pull-left` and `pull-right` have three properties respectively as follows.
 | pull | Function | x | A pull event will be fired continuously before released. |
 | release | Function | x | A release event will be fired when released. |
 
-The `pull` or `release` parameter `x` refers to the distance that page leaves the boundary which is an absolute value.
+> The `pull` or `release` parameter `x` refers to the distance that page leaves the boundary which is an absolute value.
 
 ## License
 This project is licensed under the MIT License.
