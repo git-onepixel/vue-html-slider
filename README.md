@@ -15,17 +15,17 @@ A simple, light and configurable vue silder component.
 
 ## Installation
 use npm
-```
+``` bash
 npm install vue-html-slider
 ```
 use yarn
-```
+``` bash
 yarn add vue-html-slider
 ```
 
 ## Get Started
 Just one property is required to start the slider. As follows.
-```
+``` bash
 # vue template
 <template> 
     <vue-html-slider :data="images"></vue-html-slider>
@@ -54,7 +54,7 @@ With just a few steps, you can get a slider. As well, there is an online [demo](
 ## Advanced
 Slider defines many properties for customizing what you want. You can set the `options` property to slider as follow.
 
-```
+``` bash
 <vue-html-slider :options="options"></vue-html-slider>
 ...
 data() {
@@ -98,7 +98,7 @@ The `options` contains many properties. All properties are listed below.
 ## Pull-left / Pull-right
 You can move more when reached slider left or right boundary if you set `disableBounce` false. So, you can listen the event by setting the `pull-left` or `pull-right` property to slider. As follows.
 
-```
+``` bash
 <vue-html-slider :pull-left="pullLeft" :pull-right="pullRight"></vue-html-slider>
 ...
 data() {
@@ -125,8 +125,6 @@ The `pull-left` and `pull-right` have three properties respectively as follows.
 | release | Function | x | A release event will be fired when released. |
 
 The `pull` or `release` parameter `x` refers to the distance that page leaves the boundary which is an absolute value.
-
-As well, in order to apply it in your project easily, a vue demo project for this component. See [slider-demo](https://github.com/git-onepixel/slider-demo) for help.
 
 ## License
 This project is licensed under the MIT License.

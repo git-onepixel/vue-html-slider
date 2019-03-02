@@ -1,6 +1,6 @@
 /**
  * @file Slider handler
- * @author onepixel
+ * @author Onepixel<onepixel@126.com>
  */
 
 import constant from '../lib/constant';
@@ -37,8 +37,8 @@ export default {
         }
     },
 
-    mixins: mixins,
-    
+    mixins,
+
     computed: {
         current() {
             let index = this.pageNow - 1;
@@ -60,7 +60,7 @@ export default {
             // Make the prop data copy to inner variable.
             // As well, add an extra index for every card.
             this.cards = [];
-            
+
             this.data.forEach((image, index) => {
                 // create a valid card object.
                 let card = helper.createSliderCard(image);
@@ -99,7 +99,7 @@ export default {
             // Add a gap to between images.
             this.cardWidth += this.options.gapWidth || 0;
             // The max offset of last page.
-            this.maxOffset = - this.cardWidth * (this.cards.length -1);
+            this.maxOffset = - this.cardWidth * (this.cards.length - 1);
             // Transform images to default position.
             this.setTransform(- this.cardWidth * index);
             // Set images dom element.
@@ -107,7 +107,7 @@ export default {
             // Calculate current page index.
             this.setCurrentPageIndex();
             // Handle default event.
-            this.callback(constant.CHANGED); 
+            this.callback(constant.CHANGED);
             // Initialize user touch event.
             this.initUserTouchEvent();
         }

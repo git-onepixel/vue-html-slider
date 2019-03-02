@@ -1,5 +1,6 @@
 /**
  * @file webpack.prod.conf
+ * @author Onepixel<onepixel@126.com>
  */
 
 const path = require('path');
@@ -8,7 +9,9 @@ const merge = require('webpack-merge');
 const baseWebpackConfig = require('./webpack.base.conf');
 const pkg = require('../package.json');
 
-const banner = `${pkg.name} v${pkg.version}\n${pkg.copyright} ${pkg.author}\n${pkg.released}`;
+const license = `Released under the ${pkg.license} License.`;
+const copyright = `${pkg.copyright}, ${pkg.author.name}<${pkg.author.email}>`;
+const banner = `${pkg.name} v${pkg.version}\n${pkg.homepage}\n${copyright}\n${license}`;
 
 module.exports = merge(baseWebpackConfig, {
     entry: {

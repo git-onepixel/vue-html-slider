@@ -1,9 +1,11 @@
 /**
- * @file app
+ * @file DEMO App
+ * @author Onepixel<onepixel@126.com>
  */
 
 import Vue from 'vue';
 import vueHtmlSlider from './slider';
+import './assets/less/app.less';
 
 new Vue({
     el: '#app',
@@ -36,7 +38,7 @@ new Vue({
                     // console.log('click', obj);
                 },
                 changed(obj) {
-                    // console.log('changed', obj)
+                    console.log('changed', obj)
                 },
                 longTap(obj) {
                     // console.log('longTap', obj)
@@ -46,7 +48,7 @@ new Vue({
                 }
             },
             pullRight: {
-                tpl: `<div class="query-more pull"><span>右拉查看文档</span></div>`,
+                tpl: `<div class="query-more pull"><span>查看文档</span></div>`,
                 pull(x) {
                     if (x > 50) {
                         this.tpl = `<div class="query-more release"><span>释放查看</span></div>`;
@@ -65,8 +67,9 @@ new Vue({
         'vue-html-slider': vueHtmlSlider
     },
 
-    methods: {
-
+    created() {
+        let img = new Image();
+        img.src = 'https://www.duqianduan.com/log/s.gif';
     }
 
 });

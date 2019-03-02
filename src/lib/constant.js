@@ -1,6 +1,6 @@
 /**
  * @file Constant
- * @author onepixel
+ * @author Onepixel<onepixel@126.com>
  */
 
 export default {

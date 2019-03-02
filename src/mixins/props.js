@@ -1,6 +1,6 @@
 /**
  * @file props
- * @author onepixel
+ * @author Onepixel<onepixel@126.com>
  */
 
 import options from '../lib/options';

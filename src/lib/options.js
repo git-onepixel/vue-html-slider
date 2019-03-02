@@ -1,6 +1,6 @@
 /**
  * @file Default options for slider props.
- * @author onepixel
+ * @author Onepixel<onepixel@126.com>
  */
 
 export default {

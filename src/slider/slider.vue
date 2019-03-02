@@ -51,5 +51,5 @@
     export { default } from './slider';
 </script>
 <style lang="less" scoped>
-    @import '../css/index.less';
+    @import '../assets/less/slider.less';
 </style>

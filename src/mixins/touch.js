@@ -1,6 +1,6 @@
 /**
  * @file event.
- * @author onepixel
+ * @author Onepixel<onepixel@126.com>
  */
 
 import constant from '../lib/constant';
@@ -64,7 +64,7 @@ export default {
                         } else {
                            timer && clearTimeout(timer); 
                         }
-                    }, config.logTapMills);
+                    }, config.longTapMills);
                 }
             });
             // Transform card successive when finger moving on screen.
@@ -154,7 +154,7 @@ export default {
                              self.callback(constant.CLICK);
                          }  
                          // When long tap event end.
-                         if (deltaT > config.logTapMills) {
+                         if (deltaT > config.longTapMills) {
                              self.callback(constant.LONG_TAP_END);
                          }
                      }
@@ -276,28 +276,18 @@ export default {
          /**
           * Handle callback method of props.
           * @param {String} fn method name.
-          * @param {Object} options config object.  
           */
-         callback(fn, options) {
-            let self = this;
+         callback(fn) {
             let cb = this.options[fn];
             let obj = this.current;
             if (typeof cb !== 'function') {
-                 cb = function (obj, options) {
-                     self.log(fn, obj, options);
+                 cb = obj => {
+                    if (this.options.isDebug) {
+                        console.log(fn, obj);
+                    } 
                  }
             }
-            cb(obj, options);
-         },
-
-         /** 
-          * Print log infos
-          */
-         log() {
-             // Turn on debug mode.
-             if (this.options.isDebug) {
-                 console.log.apply(null, arguments);
-             }
+            cb(obj);
          }
     }
 }

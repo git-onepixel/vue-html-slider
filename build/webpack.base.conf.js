@@ -1,11 +1,12 @@
 /**
  * @file webpack.base.conf
+ * @author Onepixel<onepixel@126.com>
  */
 
 module.exports = {
     resolve: {
         alias: {
-            vue: 'vue/dist/vue.js',
+            vue: 'vue/dist/vue.js'
         }
     },
     module: {
@@ -20,15 +21,14 @@ module.exports = {
                 exclude: /node_modules/
             },
             {
-                test: /\.(css|less)$/,
-                loader: 'postcss-loader!less-loader!css-loader!style-loader'
+                test: /\.less$/,
+                use: ['style-loader', 'css-loader', 'less-loader', 'postcss-loader']
             },
             {
                 test: /\.(png|jpg|gif)$/,
                 loader: 'url-loader',
                 query: {
-                    limit: 8192,
-                    name: 'img/[name].[hash:8].[ext]'
+                    limit: 8192
                 } 
             }
         ]

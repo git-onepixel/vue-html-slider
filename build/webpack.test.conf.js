@@ -4,6 +4,7 @@
  */
 
 const path = require('path');
+const webpack = require('webpack');
 const merge = require('webpack-merge');
 const baseWebpackConfig = require('./webpack.base.conf');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
@@ -13,21 +14,25 @@ module.exports = merge(baseWebpackConfig, {
         app: './src/app.js'
     },
     output: {
-        path: path.join(__dirname, 'dist'),
+        path: path.join(__dirname, '../demo'),
         filename: '[name].js'
     },
-    devServer: {
-        port: '8080',
-        host: '0.0.0.0',
-        disableHostCheck: true
-    },
     plugins: [
+        new webpack.optimize.UglifyJsPlugin({
+            compress: {
+                warnings: false
+            }
+        }), 
         new HtmlWebpackPlugin({
             filename: 'index.html',
             template: 'index.html',
-            inject: true
+            inject: true,
+            minify: {
+                removeComments: true,
+                collapseWhitespace: true,
+                minifyCSS: true
+            }
         })
-    ],
-    devtool: '#cheap-module-eval-source-map'
+    ]
 });
 

@@ -1,6 +1,6 @@
 /**
  * @file pull
- * @author onepixel
+ * @author Onepixel<onepixel@126.com>
  */
 
 import constant from '../lib/constant';

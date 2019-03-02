@@ -1,6 +1,6 @@
 /**
  * @file image.
- * @author onepixel
+ * @author Onepixel<onepixel@126.com>
  */
 
 import constant from '../lib/constant';
@@ -12,15 +12,14 @@ export default {
          * Set 16 mills delay for a fade animation.
          */
         setImageElement() {
-            var self = this;
-            var el = this.$refs.container;
+            let el = this.$refs.container;
             setTimeout(() => {
                 var images = el.querySelectorAll('img');
                 this.cards.forEach((card, index) => {
                     card.el = images[index];
                 });
                 // Load all images if disable lazyload.
-                if (!self.options.lazyload) {
+                if (!this.options.lazyload) {
                     this.loadAllImages();
                 }   
                 this.setImageView(false);
@@ -64,21 +63,20 @@ export default {
          * Preload image when appears.
          * @param card image object.
          */
-        preload: function (card) {
-            var self = this;
+        preload(card) {
             if (card.el.complete) {
                 card.loaded = true;
-                self.display(card, true);
+                this.display(card, true);
             } else {
-                card.el.onload = function () {
+                card.el.onload = () => {
                     card.loaded = true;
-                    self.display(card, card.index === self.curIndex);
+                    this.display(card, card.index === this.curIndex);
                 }
             }
-            card.el.onerror = function () {
+            card.el.onerror = () => {
                 card.error = true;
                 card.loaded = true;
-                self.display(card, false)
+                this.display(card, false)
             }
         },
 
@@ -87,7 +85,7 @@ export default {
          * @param {*} card card object of cards.
          * @param {*} status display or hide.
          */
-        display: function (card, status) {
+        display(card, status) {
             if (card && card.display !== status) {
                 if (status && !card.loaded) {
                     card.el.src = card.src;

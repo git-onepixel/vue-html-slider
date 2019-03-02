@@ -1,5 +1,6 @@
 /**
  * @file helper
+ * @author Onepixel<onepixel@126.com>
  */
 
 export default {
@@ -37,5 +38,5 @@ export default {
             // returns a null value to indicate an invalid value
             return null;
         }
-    },
+    }
 }
