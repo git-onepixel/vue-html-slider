@@ -15,13 +15,14 @@ module.exports = merge(baseWebpackConfig, {
     },
     output: {
         path: path.join(__dirname, '../demo'),
-        filename: '[name].js'
+        filename: '[name].js?[hash:8]'
     },
     plugins: [
         new webpack.optimize.UglifyJsPlugin({
             compress: {
                 warnings: false
-            }
+            },
+            comments: false
         }), 
         new HtmlWebpackPlugin({
             filename: 'index.html',
@@ -29,8 +30,7 @@ module.exports = merge(baseWebpackConfig, {
             inject: true,
             minify: {
                 removeComments: true,
-                collapseWhitespace: true,
-                minifyCSS: true
+                collapseWhitespace: true
             }
         })
     ]
