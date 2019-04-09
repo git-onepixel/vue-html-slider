@@ -1,5 +1,5 @@
 /**
- * @file props
+ * @file Props set
  * @author Onepixel<onepixel@126.com>
  */
 

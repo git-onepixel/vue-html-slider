@@ -1,5 +1,5 @@
 /**
- * @file event.
+ * @file Touch event
  * @author Onepixel<onepixel@126.com>
  */
 
@@ -55,8 +55,8 @@ export default {
                     isMove = false;
                     // Initialize `isTouchEnd`
                     isTouchEnd = false;
-                    // Check whether trigger `touchmove`
-                    // If it don't move after 500 mills, I think it triggered `longtap` event.
+                    // Check whether trigger `touchmove`.
+                    // If it don't move after 500 mills, I think it should trigger `longtap` event.
                     // Otherwise, cancel timer to stop check.
                     timer = setTimeout(() => {
                         if (!isMove) {
@@ -169,14 +169,14 @@ export default {
          setPageNow(offset) {
              this.pageNow = Math.round(Math.abs(offset) / this.cardWidth) + 1;
              // Set page number, it should put DOM operation to asynchronous queue in order to prevent unfluency.
-             setTimeout(function () {
+             setTimeout(() => {
                  // Set current page index.
                  this.setCurrentPageIndex();
                  // Apply fade to image.
                  this.setImageView(false);
                  // Handle changed event.
                  this.callback(constant.CHANGED);
-             }.bind(this), 100);
+             }, 100);
          },
  
          /**

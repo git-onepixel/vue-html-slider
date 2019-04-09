@@ -1,5 +1,5 @@
 /**
- * @file pull
+ * @file Pull event
  * @author Onepixel<onepixel@126.com>
  */
 

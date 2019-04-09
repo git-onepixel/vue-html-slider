@@ -1,5 +1,5 @@
 /**
- * @file Mixins entry.
+ * @file Mixins entry
  * @author Onepixel<onepixel@126.com>
  */
 

@@ -1,5 +1,5 @@
 /**
- * @file image.
+ * @file Image handler
  * @author Onepixel<onepixel@126.com>
  */
 
