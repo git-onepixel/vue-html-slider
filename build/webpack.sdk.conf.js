@@ -17,12 +17,14 @@ module.exports = merge(baseWebpackConfig, {
   entry: {
     'vue-html-slider': './src/index.js',
   },
+
   output: {
     path: path.join(__dirname, '../dist'),
     library: pkg.library,
     libraryTarget: 'umd',
     filename: '[name].js',
   },
+
   plugins: [
     new webpack.optimize.UglifyJsPlugin({
       compress: {

@@ -45,12 +45,14 @@ export default {
       return this.cards[index];
     },
   },
+
   mounted() {
     // The initialization need to delay 300 mills.
     setTimeout(() => {
       this.initialize();
     }, 300);
   },
+
   methods: {
 
     /**

@@ -18,6 +18,7 @@ export default {
   data() {
     return {
       images: [
+        'https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1538712059328&di=fdf61e1b1b7a1c557bffd3b250c65d78&imgtype=0&src=http%3A%2F%2Fim6.leaderhero.com%2Fwallpaper%2F208%2Ff736fed01a61484a9826e11ca436374d.jpg',
         'https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1538711721068&di=de6a4473f2fe5d1819b51454583bb79a&imgtype=0&src=http%3A%2F%2Fpic1.win4000.com%2Fmobile%2F2017-10-10%2F59dc6fd0f132d.jpg',
         'https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1538711721037&di=45d48db20b54b191168f2c3b8043846d&imgtype=0&src=http%3A%2F%2Fim6.leaderhero.com%2Fwallpaper%2F20150210%2Ff2808fb86b.jpg',
         'https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1538711721067&di=37b66115a94d70cd7c76a49d4e47cfb2&imgtype=0&src=http%3A%2F%2Fpic1.win4000.com%2Fmobile%2F2017-10-10%2F59dc6fd5957ce.jpg',
@@ -26,7 +27,6 @@ export default {
         'https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1538711721026&di=b4e312f17f3e5f5735101ac1a78ad020&imgtype=0&src=http%3A%2F%2Fpic1.win4000.com%2Fmobile%2F2018-07-25%2F5b583bbd97161.jpg%3Fdown',
         'https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1538711843960&di=b381d6a0274f2b9bf7e0ccb6662213e6&imgtype=0&src=http%3A%2F%2Fim6.leaderhero.com%2Fwallpaper%2F199%2Ff17a17ba673e491a8da066ebfec00cd1.jpg',
         'https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1538711902827&di=4518d563adb45aa7c872bb6f2640ee5b&imgtype=0&src=http%3A%2F%2Fim6.leaderhero.com%2Fwallpaper%2F20141024%2F6f04c35f76.jpg',
-        'https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1538712059328&di=fdf61e1b1b7a1c557bffd3b250c65d78&imgtype=0&src=http%3A%2F%2Fim6.leaderhero.com%2Fwallpaper%2F208%2Ff736fed01a61484a9826e11ca436374d.jpg',
       ],
       options: {
         index: 0,

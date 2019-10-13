@@ -1,44 +1,41 @@
 <template>
-<div class="vue-html-slider-wrapper" ref="viewport">
-  <!--slider-list-wrapper-->
-  <ul class="slider-list-wrapper"
-    ref="container"
-    :style="{transform: transform, transition: transition}">
-
-    <!--pull-right-wrapper-->
+<div class="v-h-s-r" ref="viewport">
+  <!--slider-card-list-->
+  <ul class="s-c-l" ref="container" :style="{transform: transform, transition: transition}">
+    <!--slider-pull-right-->
     <div v-if="pullRight.tpl && showTpl"
-      class="pull-right-wrapper"
+      class="s-p-r"
       v-html="pullRight.tpl">
     </div>
 
-    <!--slider-card-->
-    <li class="card-wrapper"
+    <!--slider-card-wrappr-->
+    <li class="s-c-r"
       v-for="(card, index) in cards"
       :class="{fade: options.useFade, show: card.display}"
       :style="getStyle(index)"
       :key="index">
 
-      <div class="card" :class="options.clsName">
+      <div class="s-c-b" :class="options.clsName">
         <img :alt="card.title">
       </div>
 
-      <!--loading-page-->
-      <div class="loading" v-if="!card.loaded" v-html="options.loading">
-      </div>
+      <!--card-loading-view-->
+      <div class="c-l-v" v-if="!card.loaded" v-html="options.loading"></div>
 
-      <!--load-error-page-->
-      <div class="error" v-if="card.error" v-html="options.error">
-      </div>
+      <!--load-error-view-->
+      <div class="l-e-v" v-if="card.error" v-html="options.error"></div>
     </li>
 
-    <!--pull-left-wrapper-->
+    <!--slider-pull-left-->
     <div v-if="pullLeft.tpl && showTpl"
-      class="pull-left-wrapper"
+      class="s-p-l"
       v-html="pullLeft.tpl">
     </div>
+
   </ul>
-  <!--indicators-->
-  <ol class="indicators" v-show="!options.hideIndicator">
+
+  <!--card-indicator-list-->
+  <ol class="c-i-l" v-show="!options.hideIndicator">
     <li v-for="(card, index) in cards"
       v-if="card.index < maxIndicators"
       :class="{current: card.index == curIndex}"

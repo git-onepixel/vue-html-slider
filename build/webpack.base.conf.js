@@ -9,6 +9,7 @@ module.exports = {
       vue: 'vue/dist/vue.js',
     },
   },
+
   module: {
     rules: [
       {
@@ -28,7 +29,12 @@ module.exports = {
       },
       {
         test: /\.less$/,
-        use: ['style-loader', 'css-loader', 'less-loader', 'postcss-loader'],
+        use: [
+          'style-loader',
+          'css-loader',
+          'less-loader',
+          'postcss-loader',
+        ],
       },
       {
         test: /\.(png|jpg|gif)$/,
