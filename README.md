@@ -47,9 +47,9 @@ Just one property is required to start the slider as follows.
     }
 </script>
 ```
-With just a few steps, you can create a slider application. As well, there is an online [demo](https://git-onepixel.github.io/vue-html-slider/docs/index.html) which provides a real experience for you. 
+With just a few steps, you can create a slider application. As well, there is an online [demo](https://git-onepixel.github.io/vue-html-slider/index.html) which provides a real experience for you. 
 
-![avatar](https://git-onepixel.github.io/vue-html-slider/docs/qrcode.png)
+![avatar](https://git-onepixel.github.io/vue-html-slider/qrcode.png)
  
 ## Advanced
 Slider defines many properties for customizing what you want. You can set the `options` property to slider as follows.

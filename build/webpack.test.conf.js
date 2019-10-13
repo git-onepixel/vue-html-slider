@@ -38,7 +38,7 @@ module.exports = merge(baseWebpackConfig, {
         }),
         new CopyWebpackPlugin([
             {
-                from: 'public',
+                from: 'public'
             }
         ])
     ]
