@@ -1,6 +1,6 @@
 {
   "name": "vue-html-slider",
-  "version": "1.3.1",
+  "version": "1.3.2",
   "description": "A simple, light and configurable vue silder component.",
   "main": "./dist/vue-html-slider.js",
   "library": "vueHtmlSlider",
@@ -55,7 +55,7 @@
     "url-loader": "^1.1.2",
     "vue": "^2.6.7",
     "vue-html-loader": "^1.2.4",
-    "vue-loader": "^13.0.0",
+    "vue-loader": "^14.2.4",
     "vue-template-compiler": "^2.6.7",
     "webpack": "^3.0.0",
     "webpack-dev-server": "^2.5.0",
