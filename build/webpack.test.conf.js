@@ -11,10 +11,10 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 module.exports = merge(baseWebpackConfig, {
     entry: {
-        app: './src/app.js'
+        app: './test/index.js'
     },
     output: {
-        path: path.join(__dirname, '../demo'),
+        path: path.join(__dirname, '../docs'),
         filename: '[name].js?[hash:8]'
     },
     plugins: [
@@ -29,6 +29,8 @@ module.exports = merge(baseWebpackConfig, {
             template: 'index.html',
             inject: true,
             minify: {
+                minifyCSS: true,
+                minifyJS: true,
                 removeComments: true,
                 collapseWhitespace: true
             }

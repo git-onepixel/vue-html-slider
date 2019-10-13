@@ -15,7 +15,7 @@ const banner = `${pkg.name} v${pkg.version}\n${pkg.homepage}\n${copyright}\n${li
 
 module.exports = merge(baseWebpackConfig, {
     entry: {
-        'vue-html-slider': './src/slider'
+        'vue-html-slider': './src/index.js'
     },
     output: {
         path: path.join(__dirname, '../dist'),

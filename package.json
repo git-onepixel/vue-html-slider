@@ -6,8 +6,8 @@
     "library": "vueHtmlSlider",
     "scripts": {
         "dev": "webpack-dev-server --config build/webpack.dev.conf.js --inline --hot --no-info",
-        "demo": "webpack --config build/webpack.test.conf.js --progress --hide-modules",
-        "build": "webpack --config build/webpack.prod.conf.js --progress --hide-modules"
+        "test": "webpack --config build/webpack.test.conf.js --progress --hide-modules",
+        "sdk": "webpack --config build/webpack.sdk.conf.js --progress --hide-modules"
     },
     "repository": {
         "type": "git",

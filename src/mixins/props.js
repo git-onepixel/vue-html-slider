@@ -3,7 +3,7 @@
  * @author Onepixel<onepixel@126.com>
  */
 
-import options from '../lib/options';
+import options from '../libs/options';
 
 export default {
     props: {

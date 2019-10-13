@@ -3,9 +3,9 @@
  * @author Onepixel<onepixel@126.com>
  */
 
-import constant from '../lib/constant';
-import config from '../lib/config';
-import helper from '../lib/helper';
+import constant from '../libs/constant';
+import config from '../libs/config';
+import helper from '../libs/helper';
 
 export default {
     methods: {

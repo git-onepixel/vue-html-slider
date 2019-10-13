@@ -3,7 +3,7 @@
  * @author Onepixel<onepixel@126.com>
  */
 
-import constant from '../lib/constant';
+import constant from '../libs/constant';
 
 export default {
     methods: {

@@ -49,7 +49,7 @@ Just one property is required to start the slider as follows.
 ```
 With just a few steps, you can create a slider application. As well, there is an online [demo](https://www.duqianduan.com/slider/index.html) which provides a real experience for you. 
 
-![avatar](https://static.duqianduan.com/slider/qrcode.png)
+![avatar](https://www.duqianduan.com/static/slider/qrcode.png)
  
 ## Advanced
 Slider defines many properties for customizing what you want. You can set the `options` property to slider as follows.

@@ -1,0 +1,12 @@
+/**
+ * @file DEMO App
+ * @author Onepixel<onepixel@126.com>
+ */
+
+import Vue from 'vue';
+import App from './App.vue';
+
+new Vue({
+    el: '#app',
+    render: h => h(App)
+});
