@@ -8,6 +8,7 @@ const webpack = require('webpack');
 const merge = require('webpack-merge');
 const baseWebpackConfig = require('./webpack.base.conf');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const CopyWebpackPlugin = require('copy-webpack-plugin');
 
 module.exports = merge(baseWebpackConfig, {
     entry: {
@@ -34,7 +35,12 @@ module.exports = merge(baseWebpackConfig, {
                 removeComments: true,
                 collapseWhitespace: true
             }
-        })
+        }),
+        new CopyWebpackPlugin([
+            {
+                from: 'public',
+            }
+        ])
     ]
 });
 
