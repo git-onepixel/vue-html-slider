@@ -4,34 +4,39 @@
  */
 
 module.exports = {
-    resolve: {
-        alias: {
-            vue: 'vue/dist/vue.js'
-        }
+  resolve: {
+    alias: {
+      vue: 'vue/dist/vue.js',
     },
-    module: {
-        rules: [
-            {
-                test: /\.vue$/,
-                loader: 'vue-loader'
-            },
-            {
-                test: /\.js$/,
-                loader: 'babel-loader',
-                exclude: /node_modules/
-            },
-            {
-                test: /\.less$/,
-                use: ['style-loader', 'css-loader', 'less-loader', 'postcss-loader']
-            },
-            {
-                test: /\.(png|jpg|gif)$/,
-                loader: 'url-loader',
-                query: {
-                    limit: 8192
-                } 
-            }
-        ]
-    }
+  },
+  module: {
+    rules: [
+      {
+        test: /\.vue$/,
+        loader: 'vue-loader',
+      },
+      {
+        test: /\.js$/,
+        loader: 'babel-loader',
+        exclude: /node_modules/,
+      },
+      {
+        test: /\.(js|vue)$/,
+        loader: 'eslint-loader',
+        enforce: 'pre',
+        exclude: /node_modules/,
+      },
+      {
+        test: /\.less$/,
+        use: ['style-loader', 'css-loader', 'less-loader', 'postcss-loader'],
+      },
+      {
+        test: /\.(png|jpg|gif)$/,
+        loader: 'url-loader',
+        query: {
+          limit: 8192,
+        },
+      },
+    ],
+  },
 };
-

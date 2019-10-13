@@ -11,36 +11,35 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 
 module.exports = merge(baseWebpackConfig, {
-    entry: {
-        app: './test/index.js'
-    },
-    output: {
-        path: path.join(__dirname, '../docs'),
-        filename: '[name].js?[hash:8]'
-    },
-    plugins: [
-        new webpack.optimize.UglifyJsPlugin({
-            compress: {
-                warnings: false
-            },
-            comments: false
-        }), 
-        new HtmlWebpackPlugin({
-            filename: 'index.html',
-            template: 'index.html',
-            inject: true,
-            minify: {
-                minifyCSS: true,
-                minifyJS: true,
-                removeComments: true,
-                collapseWhitespace: true
-            }
-        }),
-        new CopyWebpackPlugin([
-            {
-                from: 'public'
-            }
-        ])
-    ]
+  entry: {
+    app: './test/index.js',
+  },
+  output: {
+    path: path.join(__dirname, '../docs'),
+    filename: '[name].js?[hash:8]',
+  },
+  plugins: [
+    new webpack.optimize.UglifyJsPlugin({
+      compress: {
+        warnings: false,
+      },
+      comments: false,
+    }),
+    new HtmlWebpackPlugin({
+      filename: 'index.html',
+      template: 'index.html',
+      inject: true,
+      minify: {
+        minifyCSS: true,
+        minifyJS: true,
+        removeComments: true,
+        collapseWhitespace: true,
+      },
+    }),
+    new CopyWebpackPlugin([
+      {
+        from: 'public',
+      },
+    ]),
+  ],
 });
-

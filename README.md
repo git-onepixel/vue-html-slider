@@ -13,7 +13,7 @@ A simple, light and configurable vue silder component.
 [license]: https://img.shields.io/npm/l/vue-html-slider.svg
 [license-url]:https://github.com/git-onepixel/vue-html-slider/blob/master/LICENSE
 
-## Installation
+## Install
 use npm
 ``` bash
 npm install vue-html-slider
@@ -28,23 +28,23 @@ Just one property is required to start the slider as follows.
 ``` html
 <!--vue template-->
 <template> 
-    <vue-html-slider :data="images"></vue-html-slider>
+  <vue-html-slider :data="images"></vue-html-slider>
 </template>
 <script>
-    import vueHtmlSlider from 'vue-html-slider';
-    export default {
-        components: {
-            'vue-html-slider': vueHtmlSlider
-        },
-        data() {
-            return {
-                images: [
-                    'http://path/to/a.png',
-                    'http://path/to/b.png'
-                ]
-            }
-        }
+  import vueHtmlSlider from 'vue-html-slider';
+  export default {
+    components: {
+      'vue-html-slider': vueHtmlSlider
+    },
+    data() {
+      return {
+        images: [
+          'http://path/to/a.png',
+          'http://path/to/b.png'
+        ]
+      }
     }
+  }
 </script>
 ```
 With just a few steps, you can create a slider application. As well, there is an online [demo](https://git-onepixel.github.io/vue-html-slider/index.html) which provides a real experience for you. 
@@ -56,25 +56,25 @@ Slider defines many properties for customizing what you want. You can set the `o
 
 ``` html
 <template> 
-    <vue-html-slider :options="options"></vue-html-slider>
+  <vue-html-slider :options="options"></vue-html-slider>
 </template>
 <script>
+  // ...
+  export default {
     // ...
-    export default {
-        // ...
-        data() {
-            return {
-                options: {
-                    index: 0,
-                    lazyload: true,
-                    useFade: true,
-                    click() {
-                        // user click event callback.
-                    }
-                }
-            }
+    data() {
+      return {
+        options: {
+          index: 0,
+          lazyload: true,
+          useFade: true,
+          click() {
+            // user click event callback.
+          }
         }
+      }
     }
+  }
 </script>
 ```
 
@@ -106,26 +106,26 @@ You can move more when reached slider left or right boundary if you set `disable
 
 ``` html
 <template>
-    <vue-html-slider :pull-left="pullLeft"></vue-html-slider>
+  <vue-html-slider :pull-left="pullLeft"></vue-html-slider>
 </template>
 <script>
+  // ...
+  export default {
     // ...
-    export default {
-        // ...
-        data() {
-            return {
-                pullLeft: {
-                    tpl: '<div class="foo">query all</div>',
-                    pull(x) {
-                        // pulling continuously.
-                    },
-                    release(x) {
-                        // released.
-                    }
-                }
-            }
+    data() {
+      return {
+        pullLeft: {
+          tpl: '<div class="foo">query all</div>',
+          pull(x) {
+            // pulling continuously.
+          },
+          release(x) {
+            // released.
+          }
         }
+      }
     }
+  }
 </script>
 ```
 The `pull-left` and `pull-right` have three properties respectively as follows.

@@ -9,6 +9,5 @@ import pull from './pull';
 import image from './image';
 
 export default [
-    props, touch, pull, image
+  props, touch, pull, image,
 ];
-     
