@@ -20,6 +20,12 @@ module.exports = merge(baseWebpackConfig, {
     filename: '[name].js?[hash:8]',
   },
 
+  resolve: {
+    alias: {
+      'vue-html-slider$': '../dist/vue-html-slider'
+    }
+  },
+
   plugins: [
     new webpack.optimize.UglifyJsPlugin({
       compress: {

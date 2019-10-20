@@ -52,7 +52,7 @@ With just a few steps, you can create a slider application. As well, there is an
 ![avatar](https://git-onepixel.github.io/vue-html-slider/qrcode.png)
  
 ## Advanced
-Slider defines many properties for customizing what you want. You can set the `options` property to slider as follows.
+Slider defines many properties for customizing what you want. You can set the `options` property to slider as follow.
 
 ``` html
 <template> 

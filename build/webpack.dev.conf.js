@@ -12,6 +12,12 @@ module.exports = merge(baseWebpackConfig, {
     app: './test/index.js',
   },
 
+  resolve: {
+    alias: {
+      'vue-html-slider$': '../src/core/slider.vue'
+    }
+  },
+
   devServer: {
     port: '8080',
     host: '0.0.0.0',

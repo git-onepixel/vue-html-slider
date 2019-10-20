@@ -12,7 +12,7 @@
 </template>
 
 <script>
-import vueHtmlSlider from '../src/core/slider.vue';
+import vueHtmlSlider from 'vue-html-slider';
 
 export default {
   data() {
